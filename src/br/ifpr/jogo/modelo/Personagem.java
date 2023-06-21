@@ -1,9 +1,8 @@
 package br.ifpr.jogo.modelo;
-
-
+import java.awt.event.KeyEvent;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-
+import java.util. ArrayList;
 public class Personagem {
 
     private int posicaoX;
@@ -15,10 +14,94 @@ public class Personagem {
     private int larguraImagem;
     private int alturaImagem;
 
-    public Personagem() {
+    private ArrayList<Tiro> tiros;
 
-        this.posicaoX = 120;
-        this.posicaoY = 235;
+    private static final int deslocamento = 3;
+    private static final int posicaoIx= 100;
+    private static final int posicaoIy = 100;
+
+    public Personagem() {
+        this.posicaoX = posicaoIx;
+        this.posicaoY = posicaoIy;
+        this.tiros = new ArrayList<Tiro>();
+    }
+
+   public void mover(KeyEvent tecla) {
+        int codigo = tecla.getKeyCode();
+        switch (codigo) {
+            case KeyEvent.VK_UP:
+                this.deslocamentoY = -deslocamento;
+                break;
+            case KeyEvent.VK_W:
+                this.deslocamentoY = -deslocamento;
+                break;
+            case KeyEvent.VK_DOWN:
+                this.deslocamentoY = deslocamento;
+                break;
+            case KeyEvent.VK_S:
+                this.deslocamentoY = deslocamento;
+                break;
+            case KeyEvent.VK_LEFT:
+                this.deslocamentoX = -deslocamento;
+                break;
+            case KeyEvent.VK_D:
+                this.deslocamentoX = -deslocamento;
+                break;
+            case KeyEvent.VK_RIGHT:
+                this.deslocamentoX = deslocamento;
+                break;
+            case KeyEvent.VK_A:
+                this.deslocamentoX = deslocamento;
+                break;
+
+            
+        }
+    }
+
+    public void atirar() {
+        int frenteDaNave = this.posicaoX + this.larguraImagem;
+        int meioDaNave = this.posicaoY + (this.larguraImagem / 2);
+        Tiro tiro = new Tiro(frenteDaNave, meioDaNave);
+        this.tiros.add(tiro);
+    }
+
+    public void parar (KeyEvent tecla) {
+        int codigo = tecla.getKeyCode();
+        switch (codigo) {
+            case KeyEvent.VK_UP:
+                deslocamentoY = 0;
+                break;
+            case KeyEvent.VK_A:
+                deslocamentoX = 0;
+                break;
+            case KeyEvent.VK_W:
+                deslocamentoY = 0;
+                break;
+            case KeyEvent.VK_S:
+                deslocamentoY = 0;
+                break;
+            case KeyEvent.VK_D:
+                deslocamentoX = 0;
+                break;
+            case KeyEvent.VK_DOWN:
+                deslocamentoY = 0;
+                break;
+            case KeyEvent.VK_LEFT:
+                deslocamentoX = 0;
+                break;
+            case KeyEvent.VK_RIGHT:
+                deslocamentoX = 0;
+                break;
+            default:
+                break;
+        }
+    }
+
+    
+
+    public void atualizar() {
+        this.posicaoX = this.posicaoX + this.deslocamentoX;
+        this.posicaoY = this.posicaoY + this.deslocamentoY;
     }
 
     public void carregar() {
@@ -28,6 +111,14 @@ public class Personagem {
         this.larguraImagem = this.imagem.getWidth(null);
         this.alturaImagem = this.imagem.getHeight(null);
     }
+    
+    public static int getDeslocamento() {
+        return deslocamento;
+    }
+
+    
+    
+    
 
     public int getPosicaoX() {
         return this.posicaoX;
