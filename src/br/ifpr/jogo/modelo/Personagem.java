@@ -58,12 +58,7 @@ public class Personagem {
         }
     }
 
-    public void atirar() {
-        int frenteDaNave = this.posicaoX + this.larguraImagem;
-        int meioDaNave = this.posicaoY + (this.larguraImagem / 2);
-        Tiro tiro = new Tiro(frenteDaNave, meioDaNave);
-        this.tiros.add(tiro);
-    }
+    
 
     public void parar (KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
@@ -104,6 +99,13 @@ public class Personagem {
         this.posicaoY = this.posicaoY + this.deslocamentoY;
     }
 
+    public void atirar() {
+        int frenteDaNave = this.posicaoX + this.larguraImagem;
+        int meioDaNave = this.posicaoY + (this.larguraImagem / 2);
+        Tiro tiro = new Tiro(frenteDaNave, meioDaNave);
+        this.tiros.add(tiro);
+    }
+
     public void carregar() {
 
         ImageIcon carregando = new ImageIcon("recursos\\personagem.png");
@@ -117,6 +119,14 @@ public class Personagem {
     }
 
     
+
+    public ArrayList<Tiro> getTiros() {
+        return this.tiros;
+    }
+
+    public void setTiros(ArrayList<Tiro> tiros) {
+        this.tiros = tiros;
+    }
     
     
 
