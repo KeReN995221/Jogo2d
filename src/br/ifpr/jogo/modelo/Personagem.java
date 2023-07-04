@@ -1,57 +1,51 @@
 package br.ifpr.jogo.modelo;
+import br.ifpr.jogo.modelo.ElementoGrafico;
 import java.awt.event.KeyEvent;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import java.util. ArrayList;
-public class Personagem {
+public class Personagem extends ElementoGrafico {
 
-    private int posicaoX;
-    private int posicaoY;
+    
     private int deslocamentoX;
     private int deslocamentoY;
-
-    private Image imagem;
-    private int larguraImagem;
-    private int alturaImagem;
-
     private ArrayList<Tiro> tiros;
-
     private static final int deslocamento = 3;
     private static final int posicaoIx= 100;
     private static final int posicaoIy = 100;
 
     public Personagem() {
-        this.posicaoX = posicaoIx;
-        this.posicaoY = posicaoIy;
-        this.tiros = new ArrayList<Tiro>();
+        super.setPosicaoEmX(posicaoIx);
+        super.setPosicaoEmY(posicaoIy);
+        super.tiros = new ArrayList<Tiro>();
     }
 
    public void mover(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
         switch (codigo) {
             case KeyEvent.VK_UP:
-                this.deslocamentoY = -deslocamento;
+                super.deslocamentoY = -deslocamento;
                 break;
             case KeyEvent.VK_W:
-                this.deslocamentoY = -deslocamento;
+                super.deslocamentoY = -deslocamento;
                 break;
             case KeyEvent.VK_DOWN:
-                this.deslocamentoY = deslocamento;
+                super.deslocamentoY = deslocamento;
                 break;
             case KeyEvent.VK_S:
-                this.deslocamentoY = deslocamento;
+                super.deslocamentoY = deslocamento;
                 break;
             case KeyEvent.VK_LEFT:
-                this.deslocamentoX = -deslocamento;
+                super.deslocamentoX = -deslocamento;
                 break;
             case KeyEvent.VK_D:
-                this.deslocamentoX = -deslocamento;
+                super.deslocamentoX = -deslocamento;
                 break;
             case KeyEvent.VK_RIGHT:
-                this.deslocamentoX = deslocamento;
+                super.deslocamentoX = deslocamento;
                 break;
             case KeyEvent.VK_A:
-                this.deslocamentoX = deslocamento;
+                super.deslocamentoX = deslocamento;
                 break;
 
             
@@ -95,13 +89,13 @@ public class Personagem {
     
 
     public void atualizar() {
-        this.posicaoX = this.posicaoX + this.deslocamentoX;
-        this.posicaoY = this.posicaoY + this.deslocamentoY;
+        super.setPosicaoEmX (super.getPosicaoEmX() + this.deslocamentoX);
+        super.setPosicaoEmY (super.getPosicaoEmY() + this.deslocamentoY);
     }
 
     public void atirar() {
-        int frenteDaNave = this.posicaoX + this.larguraImagem;
-        int meioDaNave = this.posicaoY + (this.larguraImagem / 2);
+        int frenteDaNave = super.getPosicaoEmX() + super.getLarguraImagem();
+        int meioDaNave = super.getPosicaoEmY() + (super.getLarguraImagem() / 2);
         Tiro tiro = new Tiro(frenteDaNave, meioDaNave);
         this.tiros.add(tiro);
     }
@@ -109,9 +103,9 @@ public class Personagem {
     public void carregar() {
 
         ImageIcon carregando = new ImageIcon("recursos\\personagem.png");
-        this.imagem = carregando.getImage();
-        this.larguraImagem = this.imagem.getWidth(null);
-        this.alturaImagem = this.imagem.getHeight(null);
+        super.setImagem (carregando.getImage());
+        super.setLarguraImagem(super.imagem.getWidth(null));
+        super.setAlturaImagem (super.imagem.getHeight(null));
     }
     
     public static int getDeslocamento() {
@@ -129,23 +123,6 @@ public class Personagem {
     }
     
     
-
-    public int getPosicaoX() {
-        return this.posicaoX;
-    }
-
-    public void setPosicaoX(int posicaoX) {
-        this.posicaoX = posicaoX;
-    }
-
-    public int getPosicaoY() {
-        return this.posicaoY;
-    }
-
-    public void setPosicaoY(int posicaoY) {
-        this.posicaoY = posicaoY;
-    }
-
     public int getDeslocamentoX() {
         return this.deslocamentoX;
     }
@@ -162,27 +139,4 @@ public class Personagem {
         this.deslocamentoY = deslocamentoY;
     }
 
-    public Image getImagem() {
-        return this.imagem;
-    }
-
-    public void setImagem(Image imagem) {
-        this.imagem = imagem;
-    }
-
-    public int getLarguraImagem() {
-        return this.larguraImagem;
-    }
-
-    public void setLarguraImagem(int larguraImagem) {
-        this.larguraImagem = larguraImagem;
-    }
-
-    public int getAlturaImagem() {
-        return this.alturaImagem;
-    }
-
-    public void setAlturaImagem(int alturaImagem) {
-        this.alturaImagem = alturaImagem;
-    }
 }
