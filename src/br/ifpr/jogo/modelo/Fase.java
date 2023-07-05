@@ -18,7 +18,7 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
 
     public static final int delay = 5;
     public static final int larg_janela = 2500;
-    public static final int qtdInimigos = 50;
+    public static final int qtdInimigos = 40;
 
     public Fase() {
         setFocusable(true); // + define o foco inicial do jogo

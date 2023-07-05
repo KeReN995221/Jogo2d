@@ -1,7 +1,5 @@
 package br.ifpr.jogo.modelo;
-import br.ifpr.jogo.modelo.ElementoGrafico;
 import java.awt.event.KeyEvent;
-import java.awt.Image;
 import javax.swing.ImageIcon;
 import java.util. ArrayList;
 public class Personagem extends ElementoGrafico {
@@ -17,35 +15,35 @@ public class Personagem extends ElementoGrafico {
     public Personagem() {
         super.setPosicaoEmX(posicaoIx);
         super.setPosicaoEmY(posicaoIy);
-        super.tiros = new ArrayList<Tiro>();
+        this.tiros = new ArrayList<Tiro>();
     }
 
    public void mover(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
         switch (codigo) {
             case KeyEvent.VK_UP:
-                super.deslocamentoY = -deslocamento;
+                this.deslocamentoY = -deslocamento;
                 break;
             case KeyEvent.VK_W:
-                super.deslocamentoY = -deslocamento;
+                this.deslocamentoY = -deslocamento;
                 break;
             case KeyEvent.VK_DOWN:
-                super.deslocamentoY = deslocamento;
+                this.deslocamentoY = deslocamento;
                 break;
             case KeyEvent.VK_S:
-                super.deslocamentoY = deslocamento;
+                this.deslocamentoY = deslocamento;
                 break;
             case KeyEvent.VK_LEFT:
-                super.deslocamentoX = -deslocamento;
+                this.deslocamentoX = -deslocamento;
                 break;
             case KeyEvent.VK_D:
-                super.deslocamentoX = -deslocamento;
+                this.deslocamentoX = -deslocamento;
                 break;
             case KeyEvent.VK_RIGHT:
-                super.deslocamentoX = deslocamento;
+                this.deslocamentoX = deslocamento;
                 break;
             case KeyEvent.VK_A:
-                super.deslocamentoX = deslocamento;
+                this.deslocamentoX = deslocamento;
                 break;
 
             
@@ -104,8 +102,8 @@ public class Personagem extends ElementoGrafico {
 
         ImageIcon carregando = new ImageIcon("recursos\\personagem.png");
         super.setImagem (carregando.getImage());
-        super.setLarguraImagem(super.imagem.getWidth(null));
-        super.setAlturaImagem (super.imagem.getHeight(null));
+        super.setLarguraImagem(super.getImagem().getWidth(null));
+        super.setAlturaImagem (super.getImagem().getHeight(null));
     }
     
     public static int getDeslocamento() {
