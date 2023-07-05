@@ -74,7 +74,13 @@ public class FaseUm extends Fase {
 
                 graficos.drawImage(tiro.getImagem(), tiro.getPosicaoEmX(), tiro.getPosicaoEmY(), this);
             }
+            ArrayList<SuperTiro> stiros = this.personagem.getSuperTiro();
+            for (SuperTiro stiro : stiros) {
 
+                stiro.carregar();
+
+                graficos.drawImage(stiro.getImagem(), stiro.getPosicaoEmX(), stiro.getPosicaoEmY(), this);
+            }
             for (Inimigo inimigo : inimigos) {
 
                 inimigo.carregar();
@@ -116,6 +122,7 @@ public class FaseUm extends Fase {
     public void actionPerformed(ActionEvent e) {
         personagem.atualizar();
         ArrayList<Tiro> tiros = personagem.getTiros();
+
         for (int i = 0; i < tiros.size(); i++) {
 
             if (tiros.get(i).getPosicaoEmX() > larg_janela)
@@ -124,6 +131,16 @@ public class FaseUm extends Fase {
             else
 
                 tiros.get(i).atualizar();
+        }
+        ArrayList<SuperTiro> stiros = personagem.getTiros();
+        for (int i = 0; i < tiros.size(); i++) {
+
+            if (stiros.get(i).getPosicaoEmX() > larg_janela)
+
+                stiros.remove(i);
+            else
+
+                stiros.get(i).atualizar();
         }
         for (int i = 0; i < inimigos.size(); i++) {
 
