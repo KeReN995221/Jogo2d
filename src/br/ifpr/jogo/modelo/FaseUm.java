@@ -47,6 +47,14 @@ public class FaseUm extends Fase {
                     tiro.setEhVisivel(false);
                 }
             }
+            ArrayList<SuperTiro> stiros = this.personagem.getSuperTiro();
+            for (int j = 0; j < tiros.size(); j++) {
+                Tiro tiro = tiros.get(j);
+                Rectangle formaTiro = tiro.getRectangle();
+                if (formaInimigo.intersects(formaTiro)) {
+                    inimigo.setEhVisivel(false);
+                    tiro.setEhVisivel(false);
+                }
         }
     }
 

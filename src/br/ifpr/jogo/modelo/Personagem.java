@@ -97,6 +97,13 @@ public class Personagem extends ElementoGrafico {
         Tiro tiro = new Tiro(frenteDaNave, meioDaNave);
         this.tiros.add(tiro);
     }
+    public void satirar() {
+        int frenteDaNave = super.getPosicaoEmX() + super.getLarguraImagem();
+        int meioDaNave = super.getPosicaoEmY() + (super.getLarguraImagem() / 2);
+        SuperTiro tiro = new SuperTiro(frenteDaNave, meioDaNave);
+        this.tiros.add(tiro);
+    }
+
 
     public void carregar() {
 
