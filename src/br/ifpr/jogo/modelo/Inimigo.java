@@ -1,5 +1,11 @@
 package br.ifpr.jogo.modelo;
+<<<<<<< HEAD
+import br.ifpr.jogo.modelo.ElementoGrafico;
+import java.awt.Image;
+import java.util.ArrayList;
+=======
 import java.awt.Rectangle;
+
 
 import javax.swing.ImageIcon;
 
@@ -10,6 +16,7 @@ public class Inimigo extends ElementoGrafico {
     public Inimigo(int xAleatorio, int yAleatorio) {
         super.setPosicaoEmX(xAleatorio);
         super.setPosicaoEmY(yAleatorio); 
+
     }
 
     public void carregar() {
@@ -20,6 +27,7 @@ public class Inimigo extends ElementoGrafico {
     }
 
     public void atualizar() {
+
        super.setPosicaoEmX(getPosicaoEmX() - velocidade);
     }
 
