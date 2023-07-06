@@ -1,5 +1,4 @@
 package br.ifpr.jogo.modelo;
-import br.ifpr.jogo.modelo.ElementoGrafico;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import java.util. ArrayList;
@@ -9,6 +8,7 @@ public class Personagem extends ElementoGrafico {
     private int deslocamentoX;
     private int deslocamentoY;
     private ArrayList<Tiro> tiros;
+    private ArrayList<SuperTiro> stiros;
     private static final int deslocamento = 3;
     private static final int posicaoIx= 100;
     private static final int posicaoIy = 100;
@@ -16,37 +16,39 @@ public class Personagem extends ElementoGrafico {
     public Personagem() {
         super.setPosicaoEmX(posicaoIx);
         super.setPosicaoEmY(posicaoIy);
-        super.tiros = new ArrayList<Tiro>();
+        this.tiros = new ArrayList<Tiro>();
+        this.stiros = new ArrayList<SuperTiro>();
     }
 
    public void mover(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
         switch (codigo) {
             case KeyEvent.VK_UP:
-                super.deslocamentoY = -deslocamento;
+                this.deslocamentoY = -deslocamento;
                 break;
             case KeyEvent.VK_W:
-                super.deslocamentoY = -deslocamento;
+                this.deslocamentoY = -deslocamento;
                 break;
             case KeyEvent.VK_DOWN:
-                super.deslocamentoY = deslocamento;
+                this.deslocamentoY = deslocamento;
                 break;
             case KeyEvent.VK_S:
-                super.deslocamentoY = deslocamento;
+                this.deslocamentoY = deslocamento;
                 break;
             case KeyEvent.VK_LEFT:
-                super.deslocamentoX = -deslocamento;
+                this.deslocamentoX = -deslocamento;
                 break;
             case KeyEvent.VK_D:
-                super.deslocamentoX = -deslocamento;
+                this.deslocamentoX = -deslocamento;
                 break;
             case KeyEvent.VK_RIGHT:
-                super.deslocamentoX = deslocamento;
+                this.deslocamentoX = deslocamento;
                 break;
             case KeyEvent.VK_A:
-                super.deslocamentoX = deslocamento;
+                this.deslocamentoX = deslocamento;
                 break;
 
+            
             
         }
     }
@@ -80,13 +82,14 @@ public class Personagem extends ElementoGrafico {
             case KeyEvent.VK_RIGHT:
                 deslocamentoX = 0;
                 break;
+            
             default:
                 break;
         }
     }
 
     
-
+    @Override
     public void atualizar() {
         super.setPosicaoEmX (super.getPosicaoEmX() + this.deslocamentoX);
         super.setPosicaoEmY (super.getPosicaoEmY() + this.deslocamentoY);
@@ -98,26 +101,22 @@ public class Personagem extends ElementoGrafico {
         Tiro tiro = new Tiro(frenteDaNave, meioDaNave);
         this.tiros.add(tiro);
     }
-    public void satirar() {
+
+    public void sAtirar() {
         int frenteDaNave = super.getPosicaoEmX() + super.getLarguraImagem();
         int meioDaNave = super.getPosicaoEmY() + (super.getLarguraImagem() / 2);
-        SuperTiro tiro = new SuperTiro(frenteDaNave, meioDaNave);
-        this.tiros.add(tiro);
+        SuperTiro stiro = new SuperTiro(frenteDaNave, meioDaNave);
+        this.stiros.add(stiro);
     }
+    
 
 
     public void carregar() {
 
-        ImageIcon carregando = new ImageIcon("recursos\\personagem.png");
-<<<<<<< HEAD
-        super.setImagem (carregando.getImage());
-        super.setLarguraImagem(super.imagem.getWidth(null));
-        super.setAlturaImagem (super.imagem.getHeight(null));
-=======
+        ImageIcon carregando = new ImageIcon("C:\\Users\\Aluno\\Desktop\\jogo2d\\Jogo2d\\Recursos\\personagem.png");
         super.setImagem (carregando.getImage());
         super.setLarguraImagem(super.getImagem().getWidth(null));
         super.setAlturaImagem (super.getImagem().getHeight(null));
->>>>>>> 72e7947d56cb6287397a8a0e15a437238a7bce59
     }
     
     public static int getDeslocamento() {
@@ -150,5 +149,22 @@ public class Personagem extends ElementoGrafico {
     public void setDeslocamentoY(int deslocamentoY) {
         this.deslocamentoY = deslocamentoY;
     }
+
+    public ArrayList<SuperTiro> getSuperTiro() {
+       return this.stiros;
+    }
+    public void setSuperTiro(ArrayList<SuperTiro> stiros){
+        this.stiros = stiros;
+    }
+    public ArrayList<Tiro> getTiro() {
+       return this.tiros;
+    }
+    public void setTiro(ArrayList<Tiro> tiros){
+        this.tiros = tiros;
+    }
+
+
+
+    
 
 }

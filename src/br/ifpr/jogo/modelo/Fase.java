@@ -28,7 +28,7 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
 
     public abstract void inicializaInimigos();
 
-    public abstract void verficarColisoes();
+    public abstract void verificarColisoes();
 
     @Override
     public void keyTyped(KeyEvent e) {
