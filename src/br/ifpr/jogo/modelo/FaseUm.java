@@ -16,11 +16,12 @@ public class FaseUm extends Fase {
         setFocusable(true);
         setDoubleBuffered(true);
 
-        ImageIcon carregando = new ImageIcon("recursos\\fundo.png");
+        ImageIcon carregando = new ImageIcon("Recursos\\fundo.png");
         this.imagemFundo = carregando.getImage();
 
         this.personagem = new Personagem();
         this.personagem.carregar();
+        addKeyListener(this);
 
         this.inicializaInimigos();
         timer = new Timer(delay, this);
@@ -36,17 +37,38 @@ public class FaseUm extends Fase {
             if (formaInimigo.intersects(formaPersonagem)) {
                 this.personagem.setEhVisivel(false);
                 inimigo.setEhVisivel(false);
-                emJogo  = false;
+                emJogo = false;
             }
             ArrayList<Tiro> tiros = this.personagem.getTiros();
             for (int j = 0; j < tiros.size(); j++) {
                 Tiro tiro = tiros.get(j);
                 Rectangle formaTiro = tiro.getRectangle();
-                if (formaInimigo.intersects(formaTiro)) {
+                if (formaTiro.intersects(formaInimigo)) {
                     inimigo.setEhVisivel(false);
                     tiro.setEhVisivel(false);
                 }
             }
+            ArrayList<SuperTiro> stiros = this.personagem.getStiros();
+            for (int k = 0; k < stiros.size(); k++) {
+                SuperTiro stiro = stiros.get(k);
+                Rectangle formaSuperTiro = stiro.getRectangle();
+                if (formaSuperTiro.intersects(formaInimigo)) {
+                    inimigo.setEhVisivel(false);
+                    stiro.setEhVisivel(false);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void inicializaInimigos() {
+        inimigos = new ArrayList<Inimigo>();
+
+        for (int i = 0; i < qtdInimigos; i++) {
+            int x = (int) (Math.random() * 8000 + 1024);
+            int y = (int) (Math.random() * 650 + 30);
+            Inimigo inimigo = new Inimigo(x, y);
+            inimigos.add(inimigo);
         }
     }
 
@@ -67,6 +89,15 @@ public class FaseUm extends Fase {
                 graficos.drawImage(tiro.getImagem(), tiro.getPosicaoEmX(), tiro.getPosicaoEmY(), this);
             }
 
+            ArrayList<SuperTiro> stiros = personagem.getStiros();
+
+            for (SuperTiro stiro : stiros) {
+
+                stiro.carregar();
+
+                graficos.drawImage(stiro.getImagem(), stiro.getPosicaoEmX(), stiro.getPosicaoEmY(), this);
+            }
+
             for (Inimigo inimigo : inimigos) {
 
                 inimigo.carregar();
@@ -74,23 +105,12 @@ public class FaseUm extends Fase {
             }
 
         } else {
-            ImageIcon fimDeJogo = new ImageIcon("recursos\\fimdejogo.png");
+            ImageIcon fimDeJogo = new ImageIcon("Recursos\\fimdejogo.png");
             graficos.drawImage(fimDeJogo.getImage(), 0, 0, null);
-            System.out.println("Fim de Jogop");
         }
+
+        verficarColisoes();
         g.dispose();
-    }
-
-    @Override
-    public void inicializaInimigos() {
-        inimigos = new ArrayList<Inimigo>();
-
-        for (int i = 0; i < qtdInimigos; i++) {
-            int x = (int) (Math.random() * 8000 + 1024);
-            int y = (int) (Math.random() * 650 + 30);
-            Inimigo inimigo = new Inimigo(x, y);
-            inimigos.add(inimigo);
-        }
     }
 
     @Override
@@ -110,23 +130,40 @@ public class FaseUm extends Fase {
         ArrayList<Tiro> tiros = personagem.getTiros();
         for (int i = 0; i < tiros.size(); i++) {
 
-            if (tiros.get(i).getPosicaoEmX() > larg_janela)
+            Tiro tiro = tiros.get(i);
 
-                tiros.remove(i);
+            if (tiro.getPosicaoEmX() > larg_janela || !tiro.isEhVisivel())
+
+                tiros.remove(tiro);
             else
 
-                tiros.get(i).atualizar();
+                tiro.atualizar();
+        }
+
+        ArrayList<SuperTiro> stiros = personagem.getStiros();
+        for (int i = 0; i < stiros.size(); i++) {
+
+            SuperTiro stiro = stiros.get(i);
+
+            if (stiro.getPosicaoEmX() > larg_janela || !stiro.isEhVisivel())
+
+                stiros.remove(stiro);
+            else
+
+                stiro.atualizar();
         }
         for (int i = 0; i < inimigos.size(); i++) {
 
-            if (inimigos.get(i).getPosicaoEmX() < 0)
+            Inimigo inimigo = inimigos.get(i);
 
-                inimigos.remove(i);
+            if (inimigo.getPosicaoEmX() < 0 || !inimigo.isEhVisivel())
+
+                inimigos.remove(inimigo);
             else
 
-                inimigos.get(i).atualizar();
+                inimigo.atualizar();
         }
-        this.verficarColisoes();
+
         repaint();
     }
 
@@ -134,8 +171,9 @@ public class FaseUm extends Fase {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE)
             personagem.atirar();
+        else if (e.getKeyCode() == KeyEvent.VK_Q)
+            personagem.sAtirar();
         else
             personagem.mover(e);
     }
-
 }
