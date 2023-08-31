@@ -8,50 +8,59 @@ public class Personagem extends ElementoGrafico {
 
     private int deslocamentoX;
     private int deslocamentoY;
+    private int pontuacao = 0;
+    
     private ArrayList<Tiro> tiros;
     private ArrayList<SuperTiro> stiros;
     private static final int deslocamento = 3;
     private static final int posicaoIx = 100;
     private static final int posicaoIy = 100;
-
+    
     public Personagem() {
         this.setPosicaoEmX(posicaoIx);
         this.setPosicaoEmY(posicaoIy);
         this.tiros = new ArrayList<Tiro>();
         this.stiros = new ArrayList<SuperTiro>();
     }
-
+    
     public void mover(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
         switch (codigo) {
             case KeyEvent.VK_UP:
-                this.deslocamentoY = -deslocamento;
-                break;
+            this.deslocamentoY = -deslocamento;
+            break;
             case KeyEvent.VK_W:
-                this.deslocamentoY = -deslocamento;
-                break;
+            this.deslocamentoY = -deslocamento;
+            break;
             case KeyEvent.VK_DOWN:
-                this.deslocamentoY = deslocamento;
-                break;
+            this.deslocamentoY = deslocamento;
+            break;
             case KeyEvent.VK_S:
-                this.deslocamentoY = deslocamento;
-                break;
+            this.deslocamentoY = deslocamento;
+            break;
             case KeyEvent.VK_LEFT:
-                this.deslocamentoX = -deslocamento;
-                break;
+            this.deslocamentoX = -deslocamento;
+            break;
             case KeyEvent.VK_D:
-                this.deslocamentoX = deslocamento;
-                break;
+            this.deslocamentoX = deslocamento;
+            break;
             case KeyEvent.VK_RIGHT:
-                this.deslocamentoX = deslocamento;
-                break;
+            this.deslocamentoX = deslocamento;
+            break;
             case KeyEvent.VK_A:
-                this.deslocamentoX = -deslocamento;
-                break;
-
+            this.deslocamentoX = -deslocamento;
+            break;
+            
             default:
-                break;
+            break;
         }
+    }
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
     }
 
     public void parar(KeyEvent tecla) {
