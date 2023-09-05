@@ -6,7 +6,7 @@ public class SuperTiro extends ElementoGrafico {
     private static int velocidade = 2;
 
     public SuperTiro(int posicaoPersonagemEmX, int posicaoPersonagemEmY) {
-        super.setPosicaoEmX(posicaoPersonagemEmX - 120);
+        super.setPosicaoEmX(posicaoPersonagemEmX - 35);
         super.setPosicaoEmY(posicaoPersonagemEmY - 50);
     }
 

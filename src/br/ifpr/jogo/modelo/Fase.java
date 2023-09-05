@@ -22,7 +22,7 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
     public static final int larg_janela = 2500;
     public static final int qtdInimigos = 40;
 
-    protected static final int qtd_dinos = 30;
+    protected static final int qtd_dinos = 10;
     protected ArrayList<Dino> dinos;
 
     public Fase() {
@@ -46,8 +46,8 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
         String textoVidas = "VIDAS: " + personagem.getVidas();
 
         graficos.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 22));
-        raficos.setColor(new java.awt.Color(255, 255, 255));
-        graficos.drawString(textoVidas, 20, 25);
+        graficos.setColor(new java.awt.Color(255, 255, 255));
+        graficos.drawString(textoVidas, 20, 70);
 
     }
 

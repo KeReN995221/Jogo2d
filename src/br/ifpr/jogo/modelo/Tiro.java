@@ -6,7 +6,7 @@ public class Tiro extends ElementoGrafico {
     private static int velocidade = 2;
 
     public Tiro(int posicaoPersonagemEmX, int posicaoPersonagemEmY) {
-        super.setPosicaoEmX(posicaoPersonagemEmX - 120);
+        super.setPosicaoEmX(posicaoPersonagemEmX - 35);
         super.setPosicaoEmY(posicaoPersonagemEmY - 35);
     }
 

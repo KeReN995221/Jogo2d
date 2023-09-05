@@ -51,9 +51,12 @@ public class Personagem extends ElementoGrafico {
             case KeyEvent.VK_A:
             this.deslocamentoX = -deslocamento;
             break;
-            
+
             default:
             break;
+
+    
+
         }
     }
     public int getPontuacao() {
@@ -95,18 +98,7 @@ public class Personagem extends ElementoGrafico {
             default:
                 break;
         }
-        if (deslocamentoX < 0) {
-            deslocamentoX = 0;
-        }
-        if (deslocamentoX > 1000 - 260) {
-            deslocamentoX = 1000 - 260;
-        }
-        if (deslocamentoY < 0) {
-            deslocamentoY = 0;
-        }
-        if (deslocamentoY > 618 - 260) {
-            deslocamentoY = 618 - 260;
-        }
+        
 
         
     }
