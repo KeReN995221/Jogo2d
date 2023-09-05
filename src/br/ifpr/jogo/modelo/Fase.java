@@ -42,6 +42,15 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
         graficos.drawString(textoPontuacao, 20, 25);
     }
 
+    public void desenhaVidas(Graphics2D graficos){
+        String textoVidas = "VIDAS: " + personagem.getVidas();
+
+        graficos.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 22));
+        raficos.setColor(new java.awt.Color(255, 255, 255));
+        graficos.drawString(textoVidas, 20, 25);
+
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
     }

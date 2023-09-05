@@ -8,7 +8,8 @@ public class Personagem extends ElementoGrafico {
 
     private int deslocamentoX;
     private int deslocamentoY;
-    private int pontuacao = 0;
+    private int pontuacao;
+    private int vidas = 5; 
     
     private ArrayList<Tiro> tiros;
     private ArrayList<SuperTiro> stiros;
@@ -155,4 +156,19 @@ public class Personagem extends ElementoGrafico {
     public void setStiros(ArrayList<SuperTiro> stiros) {
         this.stiros = stiros;
     }
+
+    /**
+     * @return int return the vidas
+     */
+    public int getVidas() {
+        return vidas;
+    }
+
+    /**
+     * @param vidas the vidas to set
+     */
+    public void setVidas(int vidas) {
+        this.vidas = vidas;
+    }
+
 }

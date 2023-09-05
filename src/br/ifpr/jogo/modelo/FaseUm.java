@@ -40,9 +40,15 @@ public class FaseUm extends Fase {
             Inimigo inimigo = inimigos.get(i);
             Rectangle formaInimigo = inimigo.getRectangle();
             if (formaInimigo.intersects(formaPersonagem)) {
-                this.personagem.setEhVisivel(false);
+                int vidaNow = this.personagem.getVidas();
+                this.personagem.setVidas(vidaNow -1);
                 inimigo.setEhVisivel(false);
-                emJogo = false;
+
+                if (this.personagem.getVidas() == 0){
+                    this.personagem.setEhVisivel(false);
+                    inimigo.setEhVisivel(false);
+                    emJogo = false;
+                }
             }
             ArrayList<Tiro> tiros = this.personagem.getTiros();
             for (int j = 0; j < tiros.size(); j++) {
@@ -133,6 +139,7 @@ public class FaseUm extends Fase {
 
 
             super.desenhaPontuacao(graficos);
+            super.desenhaVidas(graficos);
 
         } else {
             ImageIcon fimDeJogo = new ImageIcon("Recursos\\fimdejogo.png");
