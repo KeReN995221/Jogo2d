@@ -95,6 +95,20 @@ public class Personagem extends ElementoGrafico {
             default:
                 break;
         }
+        if (deslocamentoX < 0) {
+            deslocamentoX = 0;
+        }
+        if (deslocamentoX > 1000 - 260) {
+            deslocamentoX = 1000 - 260;
+        }
+        if (deslocamentoY < 0) {
+            deslocamentoY = 0;
+        }
+        if (deslocamentoY > 618 - 260) {
+            deslocamentoY = 618 - 260;
+        }
+
+        
     }
 
     @Override
