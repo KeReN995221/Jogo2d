@@ -18,7 +18,7 @@ public class FaseUm extends Fase {
         setFocusable(true);
         setDoubleBuffered(true);
 
-        ImageIcon carregando = new ImageIcon("Recursos\\fundo2.jpg");
+        ImageIcon carregando = new ImageIcon (getClass().getResource("/fundo2.jpg"));
         this.imagemFundo = carregando.getImage();
 
         this.personagem = new Personagem();
@@ -142,7 +142,7 @@ public class FaseUm extends Fase {
             super.desenhaVidas(graficos);
 
         } else {
-            ImageIcon fimDeJogo = new ImageIcon("Recursos\\fimdejogo.png");
+            ImageIcon fimDeJogo = new ImageIcon (getClass().getResource("/fimdejogo.png"));
             graficos.drawImage(fimDeJogo.getImage(), 0, 0, null);
         }
 

@@ -125,7 +125,7 @@ public class Personagem extends ElementoGrafico {
 
     public void carregar() {
 
-        ImageIcon carregando = new ImageIcon("Recursos\\personagem.png");
+        ImageIcon carregando = new ImageIcon (getClass().getResource("/personagem.png"));
         this.setImagem(carregando.getImage());
         this.setLarguraImagem(getImagem().getWidth(null));
         this.setAlturaImagem(getImagem().getHeight(null));

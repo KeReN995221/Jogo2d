@@ -10,7 +10,7 @@ public class Dino extends ElementoGrafico {
     }
 
     public void carregar() {
-        ImageIcon carregando = new ImageIcon("recursos\\dino.png");
+        ImageIcon carregando = new ImageIcon(getClass().getResource("/dino.png"));
         super.setImagem(carregando.getImage());
     }
 
