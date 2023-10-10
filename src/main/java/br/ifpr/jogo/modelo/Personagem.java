@@ -1,16 +1,38 @@
 package br.ifpr.jogo.modelo;
 
 import java.awt.event.KeyEvent;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 
+@Entity
+@Table(name = "tb_personagem")
 public class Personagem extends ElementoGrafico {
 
+   
+
+    @Column(name = "deslocamento_em_x")
     private int deslocamentoX;
+
+    @Column(name = "deslocamento_em_y")
     private int deslocamentoY;
+
+    @Column(name = "pontuacao")
     private int pontuacao;
+
     private int vidas = 5; 
     
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fk_tiro")
     private ArrayList<Tiro> tiros;
     private ArrayList<SuperTiro> stiros;
     private static final int deslocamento = 3;
@@ -131,6 +153,9 @@ public class Personagem extends ElementoGrafico {
         this.setAlturaImagem(getImagem().getHeight(null));
     }
 
+
+
+
     public int getDeslocamentoX() {
         return this.deslocamentoX;
     }
@@ -177,4 +202,7 @@ public class Personagem extends ElementoGrafico {
         this.vidas = vidas;
     }
 
+
+
 }
+    

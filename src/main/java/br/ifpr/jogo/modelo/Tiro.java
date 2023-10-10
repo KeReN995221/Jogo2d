@@ -1,8 +1,14 @@
 package br.ifpr.jogo.modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.swing.ImageIcon;
-
+@Entity
+@Table (name = "tb_tiro")
 public class Tiro extends ElementoGrafico {
+
+    @Column (name = "velocidade_tiro")
     private static int velocidade = 2;
 
     public Tiro(int posicaoPersonagemEmX, int posicaoPersonagemEmY) {

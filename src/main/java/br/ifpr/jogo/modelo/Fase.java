@@ -7,11 +7,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
+@Entity
+@Inheritance(strategy =  InheritanceType.TABLE_PER_CLASS)
 public abstract class Fase extends JPanel implements ActionListener, KeyListener {
+    
     protected Image imagemFundo;
     protected Personagem personagem;
     protected ArrayList<Inimigo> inimigos;
