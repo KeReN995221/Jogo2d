@@ -1,7 +1,8 @@
 package br.ifpr.jogo.principal;
-
+// Utilizar DAO - Padrão de projeto
+// MVC - para a estrutura
 import javax.swing.JFrame;
-
+// principal = view
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
@@ -22,8 +23,10 @@ public class Principal extends JFrame {
 
     public static void main(String[] args) {
        
-        Session sessao = HibernateUtil.getSession();
+        Session sessao = HibernateUtil.getSession(); // Singleton
         Principal principal = new Principal();
+
+        HibernateUtil.encerraSession();
 
     }
 }

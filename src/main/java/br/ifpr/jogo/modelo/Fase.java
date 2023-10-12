@@ -1,5 +1,5 @@
 package br.ifpr.jogo.modelo;
-
+// Fase = controller
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,10 +7,18 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -18,14 +26,34 @@ import javax.swing.Timer;
 @Inheritance(strategy =  InheritanceType.TABLE_PER_CLASS)
 public abstract class Fase extends JPanel implements ActionListener, KeyListener {
     
+    
+    @Id
+    @GeneratedValue( strategy =  GenerationType.AUTO)
+    @Column(name = "id_fase")
+    private int id_fase;
+
+    @Transient
     protected Image imagemFundo;
+
+    @OneToOne(mappedBy = "personagem")
     protected Personagem personagem;
-    protected ArrayList<Inimigo> inimigos;
+
+
+    @OneToMany(mappedBy = "inimigo")
+    protected List<Inimigo> inimigos;
+   
+    @Transient // quando nao quero salvar o elemento
     protected Timer timer;
+
+    @Column(name =  "em_jogo")
     protected boolean emJogo = true;
 
+    @Column(name = "delay")
     public static final int delay = 5;
+
+    @Column(name = "largura_janela")
     public static final int larg_janela = 2500;
+
     public static final int qtdInimigos = 40;
 
     protected static final int qtd_dinos = 10;
@@ -55,6 +83,14 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
         graficos.setColor(new java.awt.Color(255, 255, 255));
         graficos.drawString(textoVidas, 20, 70);
 
+    }
+
+     public int getId_fase() {
+        return id_fase;
+    }
+
+    public void setId_fase(int id_fase) {
+        this.id_fase = id_fase;
     }
 
     @Override

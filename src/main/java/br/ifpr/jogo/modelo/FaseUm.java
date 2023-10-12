@@ -3,12 +3,18 @@ package br.ifpr.jogo.modelo;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.Rectangle;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.swing.ImageIcon;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.Timer;
 
+@Entity
+@Table(name  = "tb_fase_um")
 public class FaseUm extends Fase {
 
     private static final int pontoInimigo = 10;
@@ -50,7 +56,7 @@ public class FaseUm extends Fase {
                     emJogo = false;
                 }
             }
-            ArrayList<Tiro> tiros = this.personagem.getTiros();
+            List<Tiro> tiros = this.personagem.getTiros();
             for (int j = 0; j < tiros.size(); j++) {
                 Tiro tiro = tiros.get(j);
                 Rectangle formaTiro = tiro.getRectangle();
@@ -113,7 +119,7 @@ public class FaseUm extends Fase {
 
             graficos.drawImage(this.personagem.getImagem(), this.personagem.getPosicaoEmX(),
             this.personagem.getPosicaoEmY(), null);
-            ArrayList<Tiro> tiros = personagem.getTiros();
+            List<Tiro> tiros = personagem.getTiros();
 
             for (Tiro tiro : tiros) {
 
@@ -167,7 +173,7 @@ public class FaseUm extends Fase {
         for (Dino dino : this.dinos) {
             dino.atualizar();
         }
-        ArrayList<Tiro> tiros = personagem.getTiros();
+        List<Tiro> tiros = personagem.getTiros();
         for (int i = 0; i < tiros.size(); i++) {
 
             Tiro tiro = tiros.get(i);

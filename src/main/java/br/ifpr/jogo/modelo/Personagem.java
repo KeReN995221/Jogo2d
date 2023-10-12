@@ -8,11 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_personagem")
@@ -30,10 +33,16 @@ public class Personagem extends ElementoGrafico {
     private int pontuacao;
 
     private int vidas = 5; 
+
+    @OneToOne
+    @JoinColumn(name = "fk_fase_id")
+    private Fase fase;
     
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fk_tiro")
-    private ArrayList<Tiro> tiros;
+    
+
+    @Transient
+    private List<Tiro> tiros;
     private ArrayList<SuperTiro> stiros;
     private static final int deslocamento = 3;
     private static final int posicaoIx = 100;
@@ -81,13 +90,7 @@ public class Personagem extends ElementoGrafico {
 
         }
     }
-    public int getPontuacao() {
-        return pontuacao;
-    }
-
-    public void setPontuacao(int pontuacao) {
-        this.pontuacao = pontuacao;
-    }
+    
 
     public void parar(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
@@ -155,6 +158,21 @@ public class Personagem extends ElementoGrafico {
 
 
 
+    public Fase getFase() {
+        return fase;
+    }
+
+    public void setFase(Fase fase) {
+        this.fase = fase;
+    }
+
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
+    }
 
     public int getDeslocamentoX() {
         return this.deslocamentoX;
@@ -172,11 +190,11 @@ public class Personagem extends ElementoGrafico {
         this.deslocamentoY = deslocamentoY;
     }
 
-    public ArrayList<Tiro> getTiros() {
+    public List<Tiro> getTiros() {
         return this.tiros;
     }
 
-    public void setTiros(ArrayList<Tiro> tiros) {
+    public void setTiros(List<Tiro> tiros) {
         this.tiros = tiros;
     }
 

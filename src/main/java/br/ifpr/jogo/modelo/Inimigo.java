@@ -2,6 +2,8 @@ package br.ifpr.jogo.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.swing.ImageIcon;
 
@@ -11,6 +13,18 @@ public class Inimigo extends ElementoGrafico {
 
     @Column (name = "velocidade_inimigo")
     private static int velocidade = 2;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_fase")
+    private Fase fase; 
+
+    public Fase getFase() {
+        return fase;
+    }
+
+    public void setFase(Fase fase) {
+        this.fase = fase;
+    }
 
     public Inimigo(int xAleatorio, int yAleatorio) {
         super.setPosicaoEmX(xAleatorio);
