@@ -1,21 +1,23 @@
 package br.ifpr.jogo.modelo;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.Rectangle;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.swing.ImageIcon;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import javax.swing.Timer;
 
 @Entity
 @Table(name  = "tb_fase_um")
-public class FaseUm extends Fase {
+public class FaseUm extends Fase { 
+
+    
 
     private static final int pontoInimigo = 10;
     

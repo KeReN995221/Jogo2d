@@ -15,30 +15,17 @@ import javax.persistence.Transient;
 @Inheritance(strategy =  InheritanceType.TABLE_PER_CLASS)
 public abstract class ElementoGrafico {
 
-    @Id
-    @GeneratedValue( strategy =  GenerationType.AUTO)
-    @Column(name =  "id_elemento_grafico")
-    private Integer id_elemento_grafico; 
+    @Id @GeneratedValue( strategy =  GenerationType.AUTO)
+    @Column(name =  "id_elemento_grafico") private Integer idElementoGrafico;; 
 
-    
+    @Column(name = "posicao_em_x")  private int posicaoEmX;
+    @Column(name = "posicao_em_y")  private int posicaoEmY;
 
-    @Column(name = "posicao_em_x")
-    private int posicaoEmX;
-    
-    @Column(name = "posicao_em_y")
-    private int posicaoEmY;
+    @Column (name =  "largura_imagem")  private int larguraImagem;
+    @Column (name =  "altura_imagem")  private int alturaImagem;
 
-    @Column (name =  "largura_imagem")
-    private int larguraImagem;
-
-    @Column (name =  "altura_imagem")
-    private int alturaImagem;
-
-    @Transient
-    private Image imagem;
-
-   
-    private boolean ehVisivel = true;
+    @Transient private Image imagem;
+    @Transient private boolean ehVisivel = true;
 
     public Rectangle getRectangle() {
 
@@ -49,12 +36,12 @@ public abstract class ElementoGrafico {
 
     public abstract void atualizar();
 
-    public Integer getId_elemento_grafico() {
-        return id_elemento_grafico;
+    public Integer getIdElementoGrafico() {
+        return idElementoGrafico;
     }
 
-    public void setId_elemento_grafico(Integer id_elemento_grafico) {
-        this.id_elemento_grafico = id_elemento_grafico;
+    public void setIdElementoGrafico(Integer idElementoGrafico) {
+        this.idElementoGrafico = idElementoGrafico;
     }
 
 

@@ -1,96 +1,79 @@
 package br.ifpr.jogo.modelo;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.swing.ImageIcon;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "tb_personagem")
 public class Personagem extends ElementoGrafico {
 
-   
+    @Column(name = "deslocamento_em_x") private int deslocamentoX;
+    @Column(name = "deslocamento_em_y")  private int deslocamentoY;
 
-    @Column(name = "deslocamento_em_x")
-    private int deslocamentoX;
+    @Column(name = "pontuacao")  private int pontuacao;
+    @Column(nullable = false, name = " vidas") private int vidas = 5;
 
-    @Column(name = "deslocamento_em_y")
-    private int deslocamentoY;
-
-    @Column(name = "pontuacao")
-    private int pontuacao;
-
-    private int vidas = 5; 
-
-    @OneToOne
-    @JoinColumn(name = "fk_fase_id")
-    private Fase fase;
-    
-    
-    
-
+    // @OneToOne
+    // @JoinColumn(name = "fk_fase_id")
     @Transient
+    private Fase fase;
+
+    @OneToMany(mappedBy = "personagem")
     private List<Tiro> tiros;
+
     private ArrayList<SuperTiro> stiros;
     private static final int deslocamento = 3;
     private static final int posicaoIx = 100;
     private static final int posicaoIy = 100;
-    
+
     public Personagem() {
         this.setPosicaoEmX(posicaoIx);
         this.setPosicaoEmY(posicaoIy);
         this.tiros = new ArrayList<Tiro>();
         this.stiros = new ArrayList<SuperTiro>();
     }
-    
+
     public void mover(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
         switch (codigo) {
             case KeyEvent.VK_UP:
-            this.deslocamentoY = -deslocamento;
-            break;
+                this.deslocamentoY = -deslocamento;
+                break;
             case KeyEvent.VK_W:
-            this.deslocamentoY = -deslocamento;
-            break;
+                this.deslocamentoY = -deslocamento;
+                break;
             case KeyEvent.VK_DOWN:
-            this.deslocamentoY = deslocamento;
-            break;
+                this.deslocamentoY = deslocamento;
+                break;
             case KeyEvent.VK_S:
-            this.deslocamentoY = deslocamento;
-            break;
+                this.deslocamentoY = deslocamento;
+                break;
             case KeyEvent.VK_LEFT:
-            this.deslocamentoX = -deslocamento;
-            break;
+                this.deslocamentoX = -deslocamento;
+                break;
             case KeyEvent.VK_D:
-            this.deslocamentoX = deslocamento;
-            break;
+                this.deslocamentoX = deslocamento;
+                break;
             case KeyEvent.VK_RIGHT:
-            this.deslocamentoX = deslocamento;
-            break;
+                this.deslocamentoX = deslocamento;
+                break;
             case KeyEvent.VK_A:
-            this.deslocamentoX = -deslocamento;
-            break;
+                this.deslocamentoX = -deslocamento;
+                break;
 
             default:
-            break;
-
-    
+                break;
 
         }
     }
-    
 
     public void parar(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
@@ -123,9 +106,7 @@ public class Personagem extends ElementoGrafico {
             default:
                 break;
         }
-        
 
-        
     }
 
     @Override
@@ -150,13 +131,11 @@ public class Personagem extends ElementoGrafico {
 
     public void carregar() {
 
-        ImageIcon carregando = new ImageIcon (getClass().getResource("/personagem.png"));
+        ImageIcon carregando = new ImageIcon(getClass().getResource("/personagem.png"));
         this.setImagem(carregando.getImage());
         this.setLarguraImagem(getImagem().getWidth(null));
         this.setAlturaImagem(getImagem().getHeight(null));
     }
-
-
 
     public Fase getFase() {
         return fase;
@@ -220,7 +199,4 @@ public class Personagem extends ElementoGrafico {
         this.vidas = vidas;
     }
 
-
-
 }
-    

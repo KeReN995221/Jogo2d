@@ -6,11 +6,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.swing.ImageIcon;
+
 @Entity
-@Table (name = "tb_tiro")
+@Table(name = "tb_tiro")
 public class Tiro extends ElementoGrafico {
 
-    @Column (name = "velocidade_tiro")
+    @Column(name = "velocidade_tiro")
     private static int velocidade = 2;
 
     @ManyToOne
@@ -32,7 +33,7 @@ public class Tiro extends ElementoGrafico {
 
     @Override
     public void carregar() {
-        ImageIcon carregando = new ImageIcon (getClass().getResource("/osso.png"));
+        ImageIcon carregando = new ImageIcon(getClass().getResource("/osso.png"));
         this.setImagem(carregando.getImage());
         this.setLarguraImagem(getImagem().getWidth(null));
         this.setAlturaImagem(getImagem().getHeight(null));
@@ -42,4 +43,5 @@ public class Tiro extends ElementoGrafico {
     public void atualizar() {
         super.setPosicaoEmX(getPosicaoEmX() + velocidade);
     }
+
 }

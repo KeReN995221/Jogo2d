@@ -3,7 +3,7 @@ package br.ifpr.jogo.principal;
 // MVC - para a estrutura
 import javax.swing.JFrame;
 // principal = view
-import org.hibernate.Hibernate;
+
 import org.hibernate.Session;
 
 import br.ifpr.jogo.conexao.HibernateUtil;

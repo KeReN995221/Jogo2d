@@ -1,13 +1,13 @@
 package br.ifpr.jogo.modelo;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.swing.ImageIcon;
 
-@Entity 
-@Table (name = "tb_dino")
+@Entity
+@Table(name = "tb_dino")
 public class Dino extends ElementoGrafico {
-
     @Column(name = "velocidade_dino")
     private static final int VELOCIDADE = 1;
 
