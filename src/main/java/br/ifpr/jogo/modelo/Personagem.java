@@ -23,13 +23,11 @@ public class Personagem extends ElementoGrafico {
 
     // @OneToOne
     // @JoinColumn(name = "fk_fase_id")
-    @Transient
-    private Fase fase;
+    @Transient private Fase fase;
 
-    @OneToMany(mappedBy = "personagem")
-    private List<Tiro> tiros;
-
-    private ArrayList<SuperTiro> stiros;
+    @OneToMany(mappedBy = "personagem") private List<Tiro> tiros;
+    @OneToMany(mappedBy = "personagem") private List<SuperTiro> stiros;
+    
     private static final int deslocamento = 3;
     private static final int posicaoIx = 100;
     private static final int posicaoIy = 100;
@@ -177,7 +175,7 @@ public class Personagem extends ElementoGrafico {
         this.tiros = tiros;
     }
 
-    public ArrayList<SuperTiro> getStiros() {
+    public List<SuperTiro> getStiros() {
         return this.stiros;
     }
 

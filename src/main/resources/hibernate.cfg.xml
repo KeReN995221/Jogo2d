@@ -18,8 +18,7 @@
         <!-- Classes que serão persistidas no tutorial -->
         <mapping class="br.ifpr.jogo.modelo.SuperTiro" />
         <mapping class="br.ifpr.jogo.modelo.Fase" />
-        <mapping class="br.ifpr.jogo.modelo.FaseUm" />
-        
+        <mapping class="br.ifpr.jogo.modelo.FaseUm" />       
         <mapping class="br.ifpr.jogo.modelo.ElementoGrafico" />
         <mapping class="br.ifpr.jogo.modelo.Personagem" />
         <mapping class="br.ifpr.jogo.modelo.Tiro" />

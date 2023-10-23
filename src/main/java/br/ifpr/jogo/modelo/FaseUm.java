@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.swing.ImageIcon;
@@ -18,8 +19,7 @@ import javax.swing.Timer;
 public class FaseUm extends Fase { 
 
     
-
-    private static final int pontoInimigo = 10;
+    @Column (name = "ponto_inimigo") private static final int pontoInimigo = 10;
     
     public FaseUm() {
         super();
@@ -70,7 +70,7 @@ public class FaseUm extends Fase {
                     tiro.setEhVisivel(false);
                 }
             }
-            ArrayList<SuperTiro> stiros = this.personagem.getStiros();
+            List<SuperTiro> stiros = this.personagem.getStiros();
             for (int k = 0; k < stiros.size(); k++) {
                 SuperTiro stiro = stiros.get(k);
                 Rectangle formaSuperTiro = stiro.getRectangle();
@@ -130,7 +130,7 @@ public class FaseUm extends Fase {
                 graficos.drawImage(tiro.getImagem(), tiro.getPosicaoEmX(), tiro.getPosicaoEmY(), this);
             }
 
-            ArrayList<SuperTiro> stiros = personagem.getStiros();
+            List<SuperTiro> stiros = personagem.getStiros();
 
             for (SuperTiro stiro : stiros) {
 
@@ -188,7 +188,7 @@ public class FaseUm extends Fase {
                 tiro.atualizar();
         }
 
-        ArrayList<SuperTiro> stiros = personagem.getStiros();
+        List<SuperTiro> stiros = personagem.getStiros();
         for (int i = 0; i < stiros.size(); i++) {
 
             SuperTiro stiro = stiros.get(i);

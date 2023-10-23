@@ -11,12 +11,10 @@ import javax.swing.ImageIcon;
 @Table(name = "tb_tiro")
 public class Tiro extends ElementoGrafico {
 
-    @Column(name = "velocidade_tiro")
-    private static int velocidade = 2;
+    @Column(name = "velocidade_tiro")  private static int velocidade = 2;
 
     @ManyToOne
-    @JoinColumn(name = "fk_personagem")
-    private Personagem personagem;
+    @JoinColumn(name = "fk_personagem") private Personagem personagem;
 
     public Personagem getPersonagem() {
         return personagem;

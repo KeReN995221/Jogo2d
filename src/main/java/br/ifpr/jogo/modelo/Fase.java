@@ -14,56 +14,37 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 @Entity
-@Table(name = "tb_fase")
+@Inheritance(strategy =  InheritanceType.TABLE_PER_CLASS)
 public abstract class Fase extends JPanel implements ActionListener, KeyListener {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_fase")
-    private int idFase;
+    @Column(name = "id_fase") private int idFase;
 
-    @Transient
-    protected Image imagemFundo;
+    @OneToMany(mappedBy = "fase") protected List<Inimigo> inimigos;
+    @Column(name = "em_jogo")  protected boolean emJogo = true;
 
-    @Transient
-    protected Personagem personagem;
-
-    @Transient //@OneToMany(mappedBy = "inimigo")
-    protected List<Inimigo> inimigos;
-    /*
-     * public List<Inimigo> getInimigos() {
-     * return inimigos;
-     * }
-     * 
-     * public void setInimigos(List<Inimigo> inimigos) {
-     * this.inimigos = inimigos;
-     * }
-     */
-
-    @Transient // quando nao quero salvar o elemento
-    protected Timer timer;
-
-    @Column(name = "em_jogo")
-    protected boolean emJogo = true;
-
-    @Column(name = "delay")
-    public static final int delay = 5;
-
-    @Column(name = "largura_janela")
-    public static final int larg_janela = 2500;
-
-    @Transient
-    public static final int qtdInimigos = 40;
-
+    @Column(name = "delay") public static final int delay = 5;
+    @Column(name = "largura_janela") public static final int larg_janela = 2500;
+    
+    // quando nao quero salvar o elemento
+    @Transient public static final int qtdInimigos = 40;
     @Transient protected static final int qtd_dinos = 10;
-    @Transient
-    protected List<Dino> dinos;
+
+    @Transient protected List<Dino> dinos;
+    @Transient protected Timer timer;
+
+    @Transient protected Image imagemFundo;
+    @Transient protected Personagem personagem;
+
 
     public Fase() {
         setFocusable(true); // + define o foco inicial do jogo

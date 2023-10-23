@@ -2,6 +2,8 @@ package br.ifpr.jogo.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.swing.ImageIcon;
 
@@ -9,8 +11,10 @@ import javax.swing.ImageIcon;
 @Table(name = "tb_super_tiro")
 public class SuperTiro extends ElementoGrafico {
 
-    @Column(name = "velocidade_super_tiro")
-    private static int velocidade = 2;
+    @Column(name = "velocidade_super_tiro")  private static int velocidade = 2;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_personagem") private Personagem personagem;
 
     public SuperTiro(int posicaoPersonagemEmX, int posicaoPersonagemEmY) {
         super.setPosicaoEmX(posicaoPersonagemEmX - 35);
@@ -28,5 +32,13 @@ public class SuperTiro extends ElementoGrafico {
     @Override
     public void atualizar() {
         super.setPosicaoEmX(getPosicaoEmX() + velocidade);
+    }
+
+    public Personagem getPersonagem() {
+        return personagem;
+    }
+
+    public void setPersonagem(Personagem personagem) {
+        this.personagem = personagem;
     }
 }
