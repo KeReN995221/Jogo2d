@@ -2,14 +2,22 @@ package br.ifpr.jogo.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 
 @Entity
 @Table(name = "tb_dino")
 public class Dino extends ElementoGrafico {
-  
-    @Column(name = "velocidade_dino") private static final int VELOCIDADE = 1;
+
+    @Transient
+    private static final int VELOCIDADE = 1;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_fase")
+    private Fase fase;
 
     public Dino(int xAleatorio, int yAleatorio) {
         this.carregar();

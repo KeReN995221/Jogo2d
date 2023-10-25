@@ -1,4 +1,4 @@
-package br.ifpr.jogo.principal;
+package br.ifpr.jogo.visao;
 // Utilizar DAO - Padrão de projeto
 // MVC - para a estrutura
 import javax.swing.JFrame;

@@ -11,21 +11,34 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Transient;
+
 @Entity
-@Inheritance(strategy =  InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class ElementoGrafico {
 
-    @Id @GeneratedValue( strategy =  GenerationType.AUTO)
-    @Column(name =  "id_elemento_grafico") private Integer idElementoGrafico;; 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name = "id_elemento_grafico")
+    private Integer idElementoGrafico;;
 
-    @Column(name = "posicao_em_x")  private int posicaoEmX;
-    @Column(name = "posicao_em_y")  private int posicaoEmY;
+    @Column(name = "posicao_em_x")
+    private int posicaoEmX;
+   
+    @Column(name = "posicao_em_y")
+    private int posicaoEmY;
 
-    @Column (name =  "largura_imagem")  private int larguraImagem;
-    @Column (name =  "altura_imagem")  private int alturaImagem;
+    @Column(name = "largura_imagem")
+    private int larguraImagem;
+    @Column(name = "altura_imagem")
+    
+    private int alturaImagem;
 
-    @Transient private Image imagem;
-    @Transient private boolean ehVisivel = true;
+    @Transient
+    private Image imagem;
+   
+    @Transient
+    private boolean ehVisivel = true;
 
     public Rectangle getRectangle() {
 
@@ -43,7 +56,6 @@ public abstract class ElementoGrafico {
     public void setIdElementoGrafico(Integer idElementoGrafico) {
         this.idElementoGrafico = idElementoGrafico;
     }
-
 
     public int getPosicaoEmX() {
         return this.posicaoEmX;

@@ -11,22 +11,25 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 @Entity
-@Table(name  = "tb_fase_um")
-public class FaseUm extends Fase { 
+@Table(name = "tb_fase_um")
+public class FaseUm extends Fase {
+
+    @Transient
+    private static final int pontoInimigo = 10;
 
     
-    @Column (name = "ponto_inimigo") private static final int pontoInimigo = 10;
-    
+
     public FaseUm() {
         super();
         setFocusable(true);
         setDoubleBuffered(true);
 
-        ImageIcon carregando = new ImageIcon (getClass().getResource("/fundo2.jpg"));
+        ImageIcon carregando = new ImageIcon(getClass().getResource("/fundo2.jpg"));
         this.imagemFundo = carregando.getImage();
 
         this.personagem = new Personagem();
@@ -49,10 +52,10 @@ public class FaseUm extends Fase {
             Rectangle formaInimigo = inimigo.getRectangle();
             if (formaInimigo.intersects(formaPersonagem)) {
                 int vidaNow = this.personagem.getVidas();
-                this.personagem.setVidas(vidaNow -1);
+                this.personagem.setVidas(vidaNow - 1);
                 inimigo.setEhVisivel(false);
 
-                if (this.personagem.getVidas() == 0){
+                if (this.personagem.getVidas() == 0) {
                     this.personagem.setEhVisivel(false);
                     inimigo.setEhVisivel(false);
                     emJogo = false;
@@ -64,8 +67,8 @@ public class FaseUm extends Fase {
                 Rectangle formaTiro = tiro.getRectangle();
                 if (formaTiro.intersects(formaInimigo)) {
                     int pontuacaoAtual = this.personagem.getPontuacao();
-                    this.personagem.setPontuacao (pontoInimigo + pontuacaoAtual);
-                    
+                    this.personagem.setPontuacao(pontoInimigo + pontuacaoAtual);
+
                     inimigo.setEhVisivel(false);
                     tiro.setEhVisivel(false);
                 }
@@ -77,7 +80,7 @@ public class FaseUm extends Fase {
                 if (formaSuperTiro.intersects(formaInimigo)) {
                     int pontuacaoAtual = this.personagem.getPontuacao();
                     this.personagem.setPontuacao(pontoInimigo + pontuacaoAtual);
-                    
+
                     inimigo.setEhVisivel(false);
                     stiro.setEhVisivel(false);
                 }
@@ -107,20 +110,21 @@ public class FaseUm extends Fase {
             super.dinos.add(dino);
         }
     }
+
     @Override
     public void paint(Graphics g) {
 
         Graphics2D graficos = (Graphics2D) g;
         if (emJogo) {
             graficos.drawImage(this.imagemFundo, 0, 0, null);
-            for (Dino  dino : dinos) {
+            for (Dino dino : dinos) {
                 // Desenhar o dino na nossa tela.
                 graficos.drawImage(dino.getImagem(), dino.getPosicaoEmX(), dino.getPosicaoEmY(), this);
-                
+
             }
 
             graficos.drawImage(this.personagem.getImagem(), this.personagem.getPosicaoEmX(),
-            this.personagem.getPosicaoEmY(), null);
+                    this.personagem.getPosicaoEmY(), null);
             List<Tiro> tiros = personagem.getTiros();
 
             for (Tiro tiro : tiros) {
@@ -145,12 +149,11 @@ public class FaseUm extends Fase {
                 graficos.drawImage(inimigo.getImagem(), inimigo.getPosicaoEmX(), inimigo.getPosicaoEmY(), this);
             }
 
-
             super.desenhaPontuacao(graficos);
             super.desenhaVidas(graficos);
 
         } else {
-            ImageIcon fimDeJogo = new ImageIcon (getClass().getResource("/fimdejogo.png"));
+            ImageIcon fimDeJogo = new ImageIcon(getClass().getResource("/fimdejogo.png"));
             graficos.drawImage(fimDeJogo.getImage(), 0, 0, null);
         }
 

@@ -6,7 +6,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.swing.ImageIcon;
@@ -15,21 +17,34 @@ import javax.swing.ImageIcon;
 @Table(name = "tb_personagem")
 public class Personagem extends ElementoGrafico {
 
-    @Column(name = "deslocamento_em_x") private int deslocamentoX;
-    @Column(name = "deslocamento_em_y")  private int deslocamentoY;
-
-    @Column(name = "pontuacao")  private int pontuacao;
-    @Column(nullable = false, name = " vidas") private int vidas = 5;
-
-    // @OneToOne
-    // @JoinColumn(name = "fk_fase_id")
-    @Transient private Fase fase;
-
-    @OneToMany(mappedBy = "personagem") private List<Tiro> tiros;
-    @OneToMany(mappedBy = "personagem") private List<SuperTiro> stiros;
+    @Column(name = "deslocamento_em_x")
+    private int deslocamentoX;
     
+    @Column(name = "deslocamento_em_y")
+    private int deslocamentoY;
+
+    @Column(name = "pontuacao")
+    private int pontuacao;
+    
+    @Column(nullable = false, name = " vidas")
+    private int vidas = 5;
+    
+    @OneToOne(mappedBy = "fk_fase")
+    @JoinColumn private Fase fase;
+
+    @OneToMany(mappedBy = "tiros")
+    @JoinColumn private List<Tiro> tiros;
+   
+    @OneToMany(mappedBy = "super_tiros")
+    @JoinColumn private List<SuperTiro> stiros;
+
+    @Transient
     private static final int deslocamento = 3;
+
+    @Transient
     private static final int posicaoIx = 100;
+
+    @Transient
     private static final int posicaoIy = 100;
 
     public Personagem() {
