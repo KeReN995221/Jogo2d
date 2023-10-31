@@ -3,9 +3,7 @@ package br.ifpr.jogo.modelo;
 import java.awt.Graphics2D;
 // Fase = controller
 import java.awt.Image;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
 
@@ -31,31 +29,31 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
     @Column(name = "id_fase")
     private int idFase;
 
-    @OneToOne(mappedBy = "personagem")
-    protected Personagem personagem;
+  //  @OneToOne(mappedBy = "personagem")
+   @Transient protected Personagem personagem;
 
-    @OneToMany(mappedBy = "inimigos")
-    protected List<Inimigo> inimigos;
+   // @OneToMany(mappedBy = "inimigos")
+    @Transient  protected List<Inimigo> inimigos;
 
-    @OneToMany(mappedBy = "dinos")
-    protected List<Dino> dinos;
-    
+   // @OneToMany(mappedBy = "dinos")
+    @Transient protected List<Dino> dinos;
+
     @Column(name = "em_jogo")
     protected boolean emJogo = true;
 
     @Transient
     public static final int delay = 5;
-   
+
     @Transient
     public static final int larg_janela = 2500;
 
     // quando nao quero salvar o elemento
     @Transient
     public static final int qtdInimigos = 40;
-    
+
     @Transient
     protected static final int qtd_dinos = 10;
-   
+
     @Transient
     protected Timer timer;
 
@@ -99,6 +97,12 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
     public void setIdFase(int idFase) {
         this.idFase = idFase;
     }
+
+    public abstract void inicializaElementosGraficosAdicionais();
+
+    public abstract void inicializaInimigos();
+
+    public abstract void verficarColisoes();
     /*
      * @Override
      * public void keyTyped(KeyEvent e) {

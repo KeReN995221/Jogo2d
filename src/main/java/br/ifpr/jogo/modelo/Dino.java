@@ -1,6 +1,5 @@
 package br.ifpr.jogo.modelo;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,10 +13,20 @@ public class Dino extends ElementoGrafico {
 
     @Transient
     private static final int VELOCIDADE = 1;
-
-    @ManyToOne
+/* @ManyToOne
     @JoinColumn(name = "fk_fase")
-    private Fase fase;
+    
+ * 
+*/  @Transient private Fase fase;
+
+    
+    public Fase getFase() {
+        return fase;
+    }
+
+    public void setFase(Fase fase) {
+        this.fase = fase;
+    }
 
     public Dino(int xAleatorio, int yAleatorio) {
         this.carregar();

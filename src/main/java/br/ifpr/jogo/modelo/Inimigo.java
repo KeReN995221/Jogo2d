@@ -15,9 +15,10 @@ public class Inimigo extends ElementoGrafico {
     @Transient
     private static int velocidade = 2;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_fase")
-    private Fase fase;
+   // @ManyToOne
+   // @JoinColumn(name = "fk_fase")
+   @Transient
+   private Fase fase;
 
     public Inimigo(int xAleatorio, int yAleatorio) {
         super.setPosicaoEmX(xAleatorio);

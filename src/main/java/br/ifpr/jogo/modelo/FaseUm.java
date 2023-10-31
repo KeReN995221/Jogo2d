@@ -1,5 +1,7 @@
 package br.ifpr.jogo.modelo;
 
+import br.ifpr.jogo.controle.FaseControler;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -22,29 +24,25 @@ public class FaseUm extends Fase {
     @Transient
     private static final int pontoInimigo = 10;
 
-    
+    FaseControler faseControler = new FaseControler();
 
-    public FaseUm() {
-        super();
-        setFocusable(true);
-        setDoubleBuffered(true);
+    @Override
+    public void inicializaInimigos() {
+        inimigos = new ArrayList<Inimigo>();
 
-        ImageIcon carregando = new ImageIcon(getClass().getResource("/fundo2.jpg"));
-        this.imagemFundo = carregando.getImage();
-
-        this.personagem = new Personagem();
-        this.personagem.carregar();
-        addKeyListener(this);
-
-        this.inicializaElementosGraficosAdicionais();
-
-        this.inicializaInimigos();
-        timer = new Timer(delay, this);
-        timer.start();
+        for (int i = 0; i < qtdInimigos; i++) {
+            int x = (int) (Math.random() * 8000 + 1024);
+            int y = (int) (Math.random() * 650 + 30);
+            Inimigo inimigo = new Inimigo(x, y);
+            inimigos.add(inimigo);
+        }
     }
 
     @Override
     public void verficarColisoes() {
+        this.personagem = new Personagem();
+        this.personagem.carregar();
+        addKeyListener(this);
         Rectangle formaPersonagem = this.personagem.getRectangle();
         for (int i = 0; i < this.inimigos.size(); i++) {
 
@@ -88,16 +86,19 @@ public class FaseUm extends Fase {
         }
     }
 
-    @Override
-    public void inicializaInimigos() {
-        inimigos = new ArrayList<Inimigo>();
+    public FaseUm() {
+        super();
+        setFocusable(true);
+        setDoubleBuffered(true);
 
-        for (int i = 0; i < qtdInimigos; i++) {
-            int x = (int) (Math.random() * 8000 + 1024);
-            int y = (int) (Math.random() * 650 + 30);
-            Inimigo inimigo = new Inimigo(x, y);
-            inimigos.add(inimigo);
-        }
+        ImageIcon carregando = new ImageIcon(getClass().getResource("/fundo2.jpg"));
+        this.imagemFundo = carregando.getImage();
+
+        this.inicializaElementosGraficosAdicionais();
+
+        this.inicializaInimigos();
+        timer = new Timer(delay, this);
+        timer.start();
     }
 
     @Override

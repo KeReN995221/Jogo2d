@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -29,14 +28,15 @@ public class Personagem extends ElementoGrafico {
     @Column(nullable = false, name = " vidas")
     private int vidas = 5;
     
-    @OneToOne(mappedBy = "fk_fase")
-    @JoinColumn private Fase fase;
+    //@OneToOne(mappedBy = "fk_fase")
+    @Transient
+    private Fase fase;
 
     @OneToMany(mappedBy = "tiros")
-    @JoinColumn private List<Tiro> tiros;
+    private  List<Tiro> tiros;
    
     @OneToMany(mappedBy = "super_tiros")
-    @JoinColumn private List<SuperTiro> stiros;
+    private  List<SuperTiro> stiros;
 
     @Transient
     private static final int deslocamento = 3;

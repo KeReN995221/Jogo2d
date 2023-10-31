@@ -36,7 +36,6 @@ public class SuperTiro extends ElementoGrafico {
     public void atualizar() {
         super.setPosicaoEmX(getPosicaoEmX() + velocidade);
     }
-
     public Personagem getPersonagem() {
         return personagem;
     }
@@ -44,4 +43,6 @@ public class SuperTiro extends ElementoGrafico {
     public void setPersonagem(Personagem personagem) {
         this.personagem = personagem;
     }
+ 
+    
 }

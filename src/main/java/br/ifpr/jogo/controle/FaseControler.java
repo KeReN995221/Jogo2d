@@ -1,42 +1,55 @@
 package br.ifpr.jogo.controle;
 
-import br.ifpr.jogo.modelo.ElementoGrafico;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
+
 import br.ifpr.jogo.modelo.Inimigo;
-import br.ifpr.jogo.modelo.Dino;
 import br.ifpr.jogo.modelo.Personagem;
-import br.ifpr.jogo.modelo.Tiro;
-import br.ifpr.jogo.modelo.SuperTiro;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.JPanel;
-
-public abstract class FaseControler extends JPanel implements ActionListener, KeyListener {
+public class FaseControler {
 
     public FaseControler() {
-        setFocusable(true); // + define o foco inicial do jogo
-        setDoubleBuffered(true); // + Otimização computacional
-        addKeyListener(this);
     }
 
-    public abstract void inicializaElementosGraficosAdicionais();
+    public List<Inimigo> inicializaElementosGraficosAdicionais(int qtdInimigos){
+        List<Inimigo> inimigos = new ArrayList<Inimigo>();
 
-    public abstract void inicializaInimigos();
-
-    public abstract void verficarColisoes();
-
-    @Override
-    public void keyTyped(KeyEvent e) {
+        for (int i = 0; i < qtdInimigos; i++) {
+            int x = (int) (Math.random() * 8000 + 1024);
+            int y = (int) (Math.random() * 650 + 30);
+            Inimigo inimigo = new Inimigo(x, y);
+            inimigos.add(inimigo);
+        }
+        return inimigos;
     }
 
-    @Override
-    public abstract void keyPressed(KeyEvent e);
+    public List<Inimigo> inicializaInimigos(int qtdInimigos){
+        List<Inimigo> inimigos = new ArrayList<Inimigo>();
 
-    @Override
-    public abstract void keyReleased(KeyEvent e);
+        for (int i = 0; i < qtdInimigos; i++) {
+            int x = (int) (Math.random() * 8000 + 1024);
+            int y = (int) (Math.random() * 650 + 30);
+            Inimigo inimigo = new Inimigo(x, y);
+            inimigos.add(inimigo);
+        }
+        return inimigos;
+    }
 
-    @Override
-    public abstract void actionPerformed(ActionEvent e);
+    public boolean verficarColisoesPersonagem(Inimigo inimigo, Personagem personagem, boolean emJogo){
+        Rectangle formaPersonagem = personagem.getRectangle();
+        Rectangle formaInimigo = inimigo.getRectangle();
+        if (formaInimigo.intersects(formaPersonagem)) {
+            int vidaNow = personagem.getVidas();
+            personagem.setVidas(vidaNow - 1);
+            inimigo.setEhVisivel(false);
+
+            if (personagem.getVidas() == 0) {
+                personagem.setEhVisivel(false);
+                inimigo.setEhVisivel(false);
+                emJogo = false;
+            }
+        }
+        return emJogo;
+    }
 }
