@@ -18,25 +18,25 @@ public abstract class ElementoGrafico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    
+
     @Column(name = "id_elemento_grafico")
     private Integer idElementoGrafico;;
 
     @Column(name = "posicao_em_x")
     private int posicaoEmX;
-   
+
     @Column(name = "posicao_em_y")
     private int posicaoEmY;
 
     @Column(name = "largura_imagem")
     private int larguraImagem;
+
     @Column(name = "altura_imagem")
-    
     private int alturaImagem;
 
     @Transient
     private Image imagem;
-   
+
     @Transient
     private boolean ehVisivel = true;
 

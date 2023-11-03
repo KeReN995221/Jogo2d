@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
@@ -29,17 +31,20 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
     @Column(name = "id_fase")
     private int idFase;
 
-  //  @OneToOne(mappedBy = "personagem")
-   @Transient protected Personagem personagem;
-
-   // @OneToMany(mappedBy = "inimigos")
-    @Transient  protected List<Inimigo> inimigos;
-
-   // @OneToMany(mappedBy = "dinos")
-    @Transient protected List<Dino> dinos;
-
     @Column(name = "em_jogo")
     protected boolean emJogo = true;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "personagem_id")
+    protected Personagem personagem;
+
+    @OneToMany
+    @JoinColumn(name = "inimigos")
+    protected List<Inimigo> inimigos;
+
+    @OneToMany
+    @JoinColumn(name = "dinos")
+    protected List<Dino> dinos;
 
     @Transient
     public static final int delay = 5;
@@ -118,4 +123,11 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
      * public abstract void actionPerformed(ActionEvent e);
      */
 
+    public List<Dino> getDinos() {
+        return dinos;
+    }
+
+    public void setDinos(List<Dino> dinos) {
+        this.dinos = dinos;
+    }
 }

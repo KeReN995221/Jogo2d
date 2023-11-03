@@ -1,7 +1,5 @@
 package br.ifpr.jogo.modelo;
 
-import br.ifpr.jogo.controle.FaseControler;
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -10,12 +8,13 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
+
+import br.ifpr.jogo.controle.FaseControler;
 
 @Entity
 @Table(name = "tb_fase_um")
@@ -24,6 +23,13 @@ public class FaseUm extends Fase {
     @Transient
     private static final int pontoInimigo = 10;
 
+    /*
+     * @OneToOne
+     * 
+     * @JoinColumn(name = "fk_fase")
+     * private Fase fase;
+     */
+    @Transient
     FaseControler faseControler = new FaseControler();
 
     @Override
@@ -43,23 +49,15 @@ public class FaseUm extends Fase {
         this.personagem = new Personagem();
         this.personagem.carregar();
         addKeyListener(this);
-        Rectangle formaPersonagem = this.personagem.getRectangle();
+        // Rectangle formaPersonagem = this.personagem.getRectangle();
         for (int i = 0; i < this.inimigos.size(); i++) {
 
             Inimigo inimigo = inimigos.get(i);
             Rectangle formaInimigo = inimigo.getRectangle();
-            if (formaInimigo.intersects(formaPersonagem)) {
-                int vidaNow = this.personagem.getVidas();
-                this.personagem.setVidas(vidaNow - 1);
-                inimigo.setEhVisivel(false);
-
-                if (this.personagem.getVidas() == 0) {
-                    this.personagem.setEhVisivel(false);
-                    inimigo.setEhVisivel(false);
-                    emJogo = false;
-                }
-            }
+            emJogo = faseControler.verficarColisoesPersonagem(inimigo, personagem, emJogo); // chamando o método da fase
+                                                                                            // controle
             List<Tiro> tiros = this.personagem.getTiros();
+
             for (int j = 0; j < tiros.size(); j++) {
                 Tiro tiro = tiros.get(j);
                 Rectangle formaTiro = tiro.getRectangle();

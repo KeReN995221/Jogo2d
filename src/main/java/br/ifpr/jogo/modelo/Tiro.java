@@ -1,5 +1,6 @@
 package br.ifpr.jogo.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -15,8 +16,8 @@ public class Tiro extends ElementoGrafico {
     @Transient
     private static int velocidade = 2;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_personagem")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "personagem_id")
     private Personagem personagem;
 
     public Personagem getPersonagem() {

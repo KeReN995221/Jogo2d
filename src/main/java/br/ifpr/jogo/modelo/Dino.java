@@ -13,13 +13,11 @@ public class Dino extends ElementoGrafico {
 
     @Transient
     private static final int VELOCIDADE = 1;
-/* @ManyToOne
-    @JoinColumn(name = "fk_fase")
-    
- * 
-*/  @Transient private Fase fase;
 
-    
+    @ManyToOne
+    @JoinColumn(name = "fk_fase")
+    private Fase fase;
+
     public Fase getFase() {
         return fase;
     }

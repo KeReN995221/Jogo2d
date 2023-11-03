@@ -1,5 +1,6 @@
 package br.ifpr.jogo.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -15,8 +16,8 @@ public class SuperTiro extends ElementoGrafico {
     @Transient
     private static int velocidade = 2;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_personagem")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "personagem_id")
     private Personagem personagem;
 
     public SuperTiro(int posicaoPersonagemEmX, int posicaoPersonagemEmY) {
@@ -36,6 +37,7 @@ public class SuperTiro extends ElementoGrafico {
     public void atualizar() {
         super.setPosicaoEmX(getPosicaoEmX() + velocidade);
     }
+
     public Personagem getPersonagem() {
         return personagem;
     }
@@ -43,6 +45,5 @@ public class SuperTiro extends ElementoGrafico {
     public void setPersonagem(Personagem personagem) {
         this.personagem = personagem;
     }
- 
-    
+
 }

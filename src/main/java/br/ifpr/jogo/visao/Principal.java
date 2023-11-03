@@ -1,4 +1,5 @@
 package br.ifpr.jogo.visao;
+
 // Utilizar DAO - Padrão de projeto
 // MVC - para a estrutura
 import javax.swing.JFrame;
@@ -13,7 +14,7 @@ public class Principal extends JFrame {
     public Principal() {
         FaseUm fase = new FaseUm();
         super.add(fase);
-        
+
         super.setVisible(true);
         this.setSize(1000, 618);
         this.setTitle("Meu Jogo");
@@ -22,7 +23,7 @@ public class Principal extends JFrame {
     }
 
     public static void main(String[] args) {
-       
+
         Session sessao = HibernateUtil.getSession(); // Singleton
         Principal principal = new Principal();
 

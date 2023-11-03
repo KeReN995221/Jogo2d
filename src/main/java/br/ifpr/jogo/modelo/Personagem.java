@@ -4,13 +4,17 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.swing.ImageIcon;
+
+import org.hibernate.annotations.ManyToAny;
 
 @Entity
 @Table(name = "tb_personagem")
@@ -18,25 +22,31 @@ public class Personagem extends ElementoGrafico {
 
     @Column(name = "deslocamento_em_x")
     private int deslocamentoX;
-    
+
     @Column(name = "deslocamento_em_y")
     private int deslocamentoY;
 
     @Column(name = "pontuacao")
     private int pontuacao;
-    
+
     @Column(nullable = false, name = " vidas")
     private int vidas = 5;
-    
-    //@OneToOne(mappedBy = "fk_fase")
-    @Transient
-    private Fase fase;
 
-    @OneToMany(mappedBy = "tiros")
-    private  List<Tiro> tiros;
-   
-    @OneToMany(mappedBy = "super_tiros")
-    private  List<SuperTiro> stiros;
+    /*
+     * @ManyToOne(cascade = CascadeType.ALL)
+     * 
+     * @JoinColumn(name = "personagem_id")
+     */
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fase_id")
+    private Fase fase;
+    // arrumar fk
+
+    @OneToMany(mappedBy = "personagem")
+    private List<Tiro> tiros;
+
+    @OneToMany(mappedBy = "personagem")
+    private List<SuperTiro> stiros;
 
     @Transient
     private static final int deslocamento = 3;
