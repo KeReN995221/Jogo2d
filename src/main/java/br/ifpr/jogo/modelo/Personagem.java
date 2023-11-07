@@ -32,11 +32,6 @@ public class Personagem extends ElementoGrafico {
     @Column(nullable = false, name = " vidas")
     private int vidas = 5;
 
-    /*
-     * @ManyToOne(cascade = CascadeType.ALL)
-     * 
-     * @JoinColumn(name = "personagem_id")
-     */
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fase_id")
     private Fase fase;
@@ -62,6 +57,15 @@ public class Personagem extends ElementoGrafico {
         this.setPosicaoEmY(posicaoIy);
         this.tiros = new ArrayList<Tiro>();
         this.stiros = new ArrayList<SuperTiro>();
+    }
+
+    @Override
+    public void carregar() {
+
+        ImageIcon carregando = new ImageIcon(getClass().getResource("/personagem.png"));
+        this.setImagem(carregando.getImage());
+        this.setLarguraImagem(getImagem().getWidth(null));
+        this.setAlturaImagem(getImagem().getHeight(null));
     }
 
     public void mover(KeyEvent tecla) {
@@ -132,12 +136,6 @@ public class Personagem extends ElementoGrafico {
 
     }
 
-    @Override
-    public void atualizar() {
-        super.setPosicaoEmX(super.getPosicaoEmX() + this.deslocamentoX);
-        super.setPosicaoEmY(super.getPosicaoEmY() + this.deslocamentoY);
-    }
-
     public void atirar() {
         int frenteDaNave = super.getPosicaoEmX() + super.getLarguraImagem();
         int meioDaNave = super.getPosicaoEmY() + (super.getLarguraImagem() / 2);
@@ -152,12 +150,10 @@ public class Personagem extends ElementoGrafico {
         this.stiros.add(stiro);
     }
 
-    public void carregar() {
-
-        ImageIcon carregando = new ImageIcon(getClass().getResource("/personagem.png"));
-        this.setImagem(carregando.getImage());
-        this.setLarguraImagem(getImagem().getWidth(null));
-        this.setAlturaImagem(getImagem().getHeight(null));
+    @Override
+    public void atualizar() {
+        super.setPosicaoEmX(super.getPosicaoEmX() + this.deslocamentoX);
+        super.setPosicaoEmY(super.getPosicaoEmY() + this.deslocamentoY);
     }
 
     public Fase getFase() {

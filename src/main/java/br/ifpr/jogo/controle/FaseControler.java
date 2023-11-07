@@ -12,7 +12,7 @@ public class FaseControler {
     public FaseControler() {
     }
 
-    public List<Inimigo> inicializaElementosGraficosAdicionais(int qtdInimigos){
+    public List<Inimigo> inicializaElementosGraficosAdicionais(int qtdInimigos) {
         List<Inimigo> inimigos = new ArrayList<Inimigo>();
 
         for (int i = 0; i < qtdInimigos; i++) {
@@ -24,7 +24,7 @@ public class FaseControler {
         return inimigos;
     }
 
-    public List<Inimigo> inicializaInimigos(int qtdInimigos){
+    public List<Inimigo> inicializaInimigos(int qtdInimigos) {
         List<Inimigo> inimigos = new ArrayList<Inimigo>();
 
         for (int i = 0; i < qtdInimigos; i++) {
@@ -36,7 +36,7 @@ public class FaseControler {
         return inimigos;
     }
 
-    public boolean verficarColisoesPersonagem(Inimigo inimigo, Personagem personagem, boolean emJogo){
+    public boolean verficarColisoesPersonagem(Inimigo inimigo, Personagem personagem, boolean emJogo) {
         Rectangle formaPersonagem = personagem.getRectangle();
         Rectangle formaInimigo = inimigo.getRectangle();
         if (formaInimigo.intersects(formaPersonagem)) {

@@ -23,41 +23,57 @@ public class FaseUm extends Fase {
     @Transient
     private static final int pontoInimigo = 10;
 
-    /*
-     * @OneToOne
-     * 
-     * @JoinColumn(name = "fk_fase")
-     * private Fase fase;
-     */
     @Transient
     FaseControler faseControler = new FaseControler();
 
+    public FaseUm() {
+        super();
+        setFocusable(true);
+        setDoubleBuffered(true);
+
+        ImageIcon carregando = new ImageIcon(getClass().getResource("/fundo2.jpg"));
+        this.imagemFundo = carregando.getImage();
+
+        this.personagem = new Personagem();
+        this.personagem.carregar();
+
+        this.inicializaElementosGraficosAdicionais();
+        this.inicializaInimigos();
+
+        addKeyListener(null);
+
+        timer = new Timer(delay, this);
+        timer.start();
+    }
+
     @Override
     public void inicializaInimigos() {
-        inimigos = new ArrayList<Inimigo>();
+        inimigos = faseControler.inicializaInimigos(qtdInimigos);
 
-        for (int i = 0; i < qtdInimigos; i++) {
-            int x = (int) (Math.random() * 8000 + 1024);
-            int y = (int) (Math.random() * 650 + 30);
-            Inimigo inimigo = new Inimigo(x, y);
-            inimigos.add(inimigo);
-        }
+        /*
+         * inimigos = new ArrayList<Inimigo>();
+         * for (int i = 0; i < qtdInimigos; i++) {
+         * int x = (int) (Math.random() * 8000 + 1024);
+         * int y = (int) (Math.random() * 650 + 30);
+         * Inimigo inimigo = new Inimigo(x, y);
+         * inimigos.add(inimigo);
+         * }
+         */
     }
 
     @Override
     public void verficarColisoes() {
-        this.personagem = new Personagem();
-        this.personagem.carregar();
-        addKeyListener(this);
+
         // Rectangle formaPersonagem = this.personagem.getRectangle();
         for (int i = 0; i < this.inimigos.size(); i++) {
 
             Inimigo inimigo = inimigos.get(i);
             Rectangle formaInimigo = inimigo.getRectangle();
-            emJogo = faseControler.verficarColisoesPersonagem(inimigo, personagem, emJogo); // chamando o método da fase
-                                                                                            // controle
-            List<Tiro> tiros = this.personagem.getTiros();
 
+            emJogo = faseControler.verficarColisoesPersonagem(inimigo, personagem, emJogo); // chamando o métod da fase
+            System.out.println(emJogo); // controle
+
+            List<Tiro> tiros = this.personagem.getTiros();
             for (int j = 0; j < tiros.size(); j++) {
                 Tiro tiro = tiros.get(j);
                 Rectangle formaTiro = tiro.getRectangle();
@@ -82,21 +98,6 @@ public class FaseUm extends Fase {
                 }
             }
         }
-    }
-
-    public FaseUm() {
-        super();
-        setFocusable(true);
-        setDoubleBuffered(true);
-
-        ImageIcon carregando = new ImageIcon(getClass().getResource("/fundo2.jpg"));
-        this.imagemFundo = carregando.getImage();
-
-        this.inicializaElementosGraficosAdicionais();
-
-        this.inicializaInimigos();
-        timer = new Timer(delay, this);
-        timer.start();
     }
 
     @Override
@@ -124,6 +125,7 @@ public class FaseUm extends Fase {
 
             graficos.drawImage(this.personagem.getImagem(), this.personagem.getPosicaoEmX(),
                     this.personagem.getPosicaoEmY(), null);
+
             List<Tiro> tiros = personagem.getTiros();
 
             for (Tiro tiro : tiros) {

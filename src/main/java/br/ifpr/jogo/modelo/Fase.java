@@ -39,7 +39,7 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
     protected Personagem personagem;
 
     @OneToMany
-    @JoinColumn(name = "inimigos")
+    @JoinColumn(name = "inimigos_id")
     protected List<Inimigo> inimigos;
 
     @OneToMany
@@ -65,13 +65,12 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
     @Transient
     protected Image imagemFundo;
 
+    public Fase() {
+        setFocusable(true); // + define o foco inicial do jogo
+        setDoubleBuffered(true); // + Otimização computacional
+        addKeyListener(this);
+    }
     /*
-     * public Fase() {
-     * setFocusable(true); // + define o foco inicial do jogo
-     * setDoubleBuffered(true); // + Otimização computacional
-     * addKeyListener(this);
-     * }
-     * 
      * public abstract void inicializaElementosGraficosAdicionais();
      * 
      * public abstract void inicializaInimigos();
@@ -130,4 +129,13 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
     public void setDinos(List<Dino> dinos) {
         this.dinos = dinos;
     }
+
+    public Personagem getPersonagem() {
+        return personagem;
+    }
+
+    public void setPersonagem(Personagem personagem) {
+        this.personagem = personagem;
+    }
+
 }
