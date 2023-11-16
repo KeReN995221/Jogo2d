@@ -1,5 +1,6 @@
 package br.ifpr.jogo.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,7 +16,7 @@ public class Dino extends ElementoGrafico {
     private static final int VELOCIDADE = 1;
 
     @ManyToOne
-    @JoinColumn(name = "fk_fase")
+    @JoinColumn(name = "fase_id")
     private Fase fase;
 
     public Fase getFase() {

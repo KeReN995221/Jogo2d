@@ -16,11 +16,14 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import org.hibernate.annotations.ManyToAny;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -38,12 +41,10 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
     @JoinColumn(name = "personagem_id")
     protected Personagem personagem;
 
-    @OneToMany
-    @JoinColumn(name = "inimigos_id")
+    @OneToMany(mappedBy = "fase")
     protected List<Inimigo> inimigos;
 
-    @OneToMany
-    @JoinColumn(name = "dinos")
+    @OneToMany(mappedBy = "fase")
     protected List<Dino> dinos;
 
     @Transient
@@ -59,7 +60,7 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
     @Transient
     protected static final int qtd_dinos = 10;
 
-    @Transient
+    @Column(name = "timer_fase")
     protected Timer timer;
 
     @Transient

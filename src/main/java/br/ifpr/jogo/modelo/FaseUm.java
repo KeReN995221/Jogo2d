@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 import br.ifpr.jogo.controle.FaseControler;
+import br.ifpr.jogo.servico.FaseServico;
 
 @Entity
 @Table(name = "tb_fase_um")
@@ -156,6 +157,8 @@ public class FaseUm extends Fase {
         } else {
             ImageIcon fimDeJogo = new ImageIcon(getClass().getResource("/fimdejogo.png"));
             graficos.drawImage(fimDeJogo.getImage(), 0, 0, null);
+            // chamar o inserir do fase dao aqui
+
         }
 
         verficarColisoes();
