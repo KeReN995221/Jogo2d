@@ -10,6 +10,7 @@ import br.ifpr.jogo.modelo.Personagem;
 public class FaseControler {
 
     public FaseControler() {
+
     }
 
     public List<Inimigo> inicializaElementosGraficosAdicionais(int qtdInimigos) {
@@ -39,6 +40,8 @@ public class FaseControler {
     public boolean verficarColisoesPersonagem(Inimigo inimigo, Personagem personagem, boolean emJogo) {
         Rectangle formaPersonagem = personagem.getRectangle();
         Rectangle formaInimigo = inimigo.getRectangle();
+        int largura_janela = 1046;
+        int altura_janela = 493;
         if (formaInimigo.intersects(formaPersonagem)) {
             int vidaNow = personagem.getVidas();
             personagem.setVidas(vidaNow - 1);
@@ -50,6 +53,7 @@ public class FaseControler {
                 emJogo = false;
             }
         }
+
         return emJogo;
     }
 }

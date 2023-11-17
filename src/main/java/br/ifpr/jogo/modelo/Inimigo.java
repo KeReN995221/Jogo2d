@@ -1,7 +1,5 @@
 package br.ifpr.jogo.modelo;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,8 +15,16 @@ public class Inimigo extends ElementoGrafico {
     private static int velocidade = 2;
 
     @ManyToOne
-    @JoinColumn(name = "fase_id")
-    private Fase fase;
+    @JoinColumn(nullable = false, name = "fk_fase")
+    private FaseUm fase_um;
+
+    public FaseUm getFaseUm() {
+        return fase_um;
+    }
+
+    public void setFaseUm(FaseUm fase_um) {
+        this.fase_um = fase_um;
+    }
 
     public Inimigo(int xAleatorio, int yAleatorio) {
         super.setPosicaoEmX(xAleatorio);
@@ -36,14 +42,6 @@ public class Inimigo extends ElementoGrafico {
     public void atualizar() {
 
         super.setPosicaoEmX(getPosicaoEmX() - velocidade);
-    }
-
-    public Fase getFase() {
-        return fase;
-    }
-
-    public void setFase(Fase fase) {
-        this.fase = fase;
     }
 
 }

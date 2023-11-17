@@ -16,15 +16,15 @@ public class Dino extends ElementoGrafico {
     private static final int VELOCIDADE = 1;
 
     @ManyToOne
-    @JoinColumn(name = "fase_id")
-    private Fase fase;
+    @JoinColumn(nullable = false, name = "fk_fase")
+    private FaseUm fase_um;
 
-    public Fase getFase() {
-        return fase;
+    public FaseUm getFaseUm() {
+        return fase_um;
     }
 
-    public void setFase(Fase fase) {
-        this.fase = fase;
+    public void setFaseUm(FaseUm fase_um) {
+        this.fase_um = fase_um;
     }
 
     public Dino(int xAleatorio, int yAleatorio) {

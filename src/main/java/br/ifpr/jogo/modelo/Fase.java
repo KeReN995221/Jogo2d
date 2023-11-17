@@ -41,12 +41,6 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
     @JoinColumn(name = "personagem_id")
     protected Personagem personagem;
 
-    @OneToMany(mappedBy = "fase")
-    protected List<Inimigo> inimigos;
-
-    @OneToMany(mappedBy = "fase")
-    protected List<Dino> dinos;
-
     @Transient
     public static final int delay = 5;
 
@@ -122,14 +116,6 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
      * @Override
      * public abstract void actionPerformed(ActionEvent e);
      */
-
-    public List<Dino> getDinos() {
-        return dinos;
-    }
-
-    public void setDinos(List<Dino> dinos) {
-        this.dinos = dinos;
-    }
 
     public Personagem getPersonagem() {
         return personagem;

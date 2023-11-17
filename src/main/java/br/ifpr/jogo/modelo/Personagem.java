@@ -14,14 +14,12 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 
-import org.hibernate.annotations.ManyToAny;
-
 @Entity
 @Table(name = "tb_personagem")
 public class Personagem extends ElementoGrafico {
 
     @Column(name = "deslocamento_em_x")
-    private int deslocamentoX;
+    int deslocamentoX;
 
     @Column(name = "deslocamento_em_y")
     private int deslocamentoY;
@@ -35,13 +33,18 @@ public class Personagem extends ElementoGrafico {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fase_id")
     private Fase fase;
-    // arrumar fk
 
     @OneToMany(mappedBy = "personagem")
     private List<Tiro> tiros;
 
     @OneToMany(mappedBy = "personagem")
     private List<SuperTiro> stiros;
+
+    @Transient
+    private static final int larg_personagem = 126;
+
+    @Transient
+    private static final int alt_personagem = 227;
 
     @Transient
     private static final int deslocamento = 3;
@@ -51,6 +54,12 @@ public class Personagem extends ElementoGrafico {
 
     @Transient
     private static final int posicaoIy = 100;
+
+    @Transient
+    private int posicaoAnteriorX;
+
+    @Transient
+    private int posicaoAnteriorY;
 
     public Personagem() {
         this.setPosicaoEmX(posicaoIx);
@@ -69,6 +78,9 @@ public class Personagem extends ElementoGrafico {
     }
 
     public void mover(KeyEvent tecla) {
+        this.posicaoAnteriorX = this.deslocamentoX;
+        this.posicaoAnteriorY = this.deslocamentoY;
+
         int codigo = tecla.getKeyCode();
         switch (codigo) {
             case KeyEvent.VK_UP:
@@ -100,6 +112,7 @@ public class Personagem extends ElementoGrafico {
                 break;
 
         }
+
     }
 
     public void parar(KeyEvent tecla) {
@@ -152,8 +165,29 @@ public class Personagem extends ElementoGrafico {
 
     @Override
     public void atualizar() {
-        super.setPosicaoEmX(super.getPosicaoEmX() + this.deslocamentoX);
-        super.setPosicaoEmY(super.getPosicaoEmY() + this.deslocamentoY);
+        int posicaoXAtual = this.getPosicaoEmX() + this.getDeslocamentoX();
+        int posicaoYAtual = this.getPosicaoEmY() + this.getDeslocamentoY();
+
+        if (posicaoXAtual < 0) {
+            posicaoXAtual = 0;
+
+        } else if (posicaoYAtual + getAlturaImagem() + 227 > 730) { // 493 é a altura da imagem - a parte que representa
+                                                                    // o solo
+            posicaoYAtual = 730 - 227 - getAlturaImagem();
+
+        }
+
+        if (posicaoYAtual < 0) {
+            posicaoYAtual = 0;
+
+            System.out.println(posicaoYAtual + " \n ");
+        } else if (posicaoXAtual + getLarguraImagem() + 126 > 1000) {
+            posicaoXAtual = 1000 - 126 - getAlturaImagem();
+        }
+
+        super.setPosicaoEmX(posicaoXAtual);
+        super.setPosicaoEmY(posicaoYAtual);
+
     }
 
     public Fase getFase() {
@@ -216,6 +250,10 @@ public class Personagem extends ElementoGrafico {
      */
     public void setVidas(int vidas) {
         this.vidas = vidas;
+    }
+
+    public boolean intersects(int largura_janela, int altura_janela) {
+        return false;
     }
 
 }

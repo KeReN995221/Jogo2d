@@ -2,17 +2,17 @@ package br.ifpr.jogo.dao;
 
 import java.util.List;
 
-import br.ifpr.jogo.modelo.FaseUm;
+import br.ifpr.jogo.modelo.Fase;
 
 public interface FaseDao {
 
-    public List<FaseUm> buscarTodos();
+    public List<Fase> buscarTodos();
 
-    public FaseUm buscarPorId(Integer id);
+    public Fase buscarPorId(Integer id);
 
-    public void inserir(FaseUm faseUm);
+    public void inserir(Fase fase);
 
-    public void atualizar(FaseUm faseUm);
+    public void atualizar(Fase fase);
 
-    public void excluir(FaseUm faseUm);
+    public void excluir(Fase fase);
 }

@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import br.ifpr.jogo.conexao.HibernateUtil;
-import br.ifpr.jogo.modelo.FaseUm;
+import br.ifpr.jogo.modelo.Fase;
 
 public class FaseDaoImpl implements FaseDao {
 
@@ -18,25 +18,25 @@ public class FaseDaoImpl implements FaseDao {
     }
 
     @Override
-    public List<FaseUm> buscarTodos() {
+    public List<Fase> buscarTodos() {
 
-        Query<FaseUm> query = this.session.createQuery("FROM FaseUm", FaseUm.class);
-        List<FaseUm> faseUms = query.getResultList();
+        Query<Fase> query = this.session.createQuery("FROM FaseUm", Fase.class);
+        List<Fase> faseUms = query.getResultList();
         return faseUms;
     }
 
     @Override
-    public FaseUm buscarPorId(Integer id) {
+    public Fase buscarPorId(Integer id) {
 
-        return this.session.find(FaseUm.class, id);
+        return this.session.find(Fase.class, id);
     }
 
     @Override
-    public void inserir(FaseUm faseUm) {
+    public void inserir(Fase fase) {
 
         try {
             session.beginTransaction();
-            session.persist(faseUm);
+            session.persist(fase);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,11 +44,11 @@ public class FaseDaoImpl implements FaseDao {
     }
 
     @Override
-    public void atualizar(FaseUm faseUm) {
+    public void atualizar(Fase fase) {
 
         try {
             session.beginTransaction();
-            session.merge(faseUm);
+            session.merge(fase);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,11 +57,11 @@ public class FaseDaoImpl implements FaseDao {
     }
 
     @Override
-    public void excluir(FaseUm faseUm) {
+    public void excluir(Fase fase) {
 
         try {
             session.beginTransaction();
-            session.remove(faseUm);
+            session.remove(fase);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.swing.ImageIcon;
@@ -23,6 +24,12 @@ public class FaseUm extends Fase {
 
     @Transient
     private static final int pontoInimigo = 10;
+
+    @OneToMany(mappedBy = "fase_um")
+    protected List<Dino> dinos;
+
+    @OneToMany(mappedBy = "fase_um")
+    protected List<Inimigo> inimigos;
 
     @Transient
     FaseControler faseControler = new FaseControler();
@@ -72,7 +79,7 @@ public class FaseUm extends Fase {
             Rectangle formaInimigo = inimigo.getRectangle();
 
             emJogo = faseControler.verficarColisoesPersonagem(inimigo, personagem, emJogo); // chamando o métod da fase
-            System.out.println(emJogo); // controle
+                                                                                            // controle
 
             List<Tiro> tiros = this.personagem.getTiros();
             for (int j = 0; j < tiros.size(); j++) {
@@ -103,12 +110,12 @@ public class FaseUm extends Fase {
 
     @Override
     public void inicializaElementosGraficosAdicionais() {
-        super.dinos = new ArrayList<Dino>();
+        this.dinos = new ArrayList<Dino>();
         for (int i = 0; i < qtd_dinos; i++) {
             int x = (int) (Math.random() * 1000);
             int y = (int) (Math.random() * 618);
             Dino dino = new Dino(x, y);
-            super.dinos.add(dino);
+            this.dinos.add(dino);
         }
     }
 
@@ -158,6 +165,7 @@ public class FaseUm extends Fase {
             ImageIcon fimDeJogo = new ImageIcon(getClass().getResource("/fimdejogo.png"));
             graficos.drawImage(fimDeJogo.getImage(), 0, 0, null);
             // chamar o inserir do fase dao aqui
+            // FaseServico faseServico = faseServico.inserir();
 
         }
 
@@ -224,11 +232,15 @@ public class FaseUm extends Fase {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        int teclado = e.getKeyCode();
+        // int novaPosicaoX = personagem.getPosicaoEmX();
+        // int novaPosicaoY = personagem.getPosicaoEmY();
+        if (teclado == KeyEvent.VK_SPACE)
             personagem.atirar();
-        else if (e.getKeyCode() == KeyEvent.VK_Q)
+        else if (teclado == KeyEvent.VK_Q)
             personagem.sAtirar();
         else
             personagem.mover(e);
+
     }
 }

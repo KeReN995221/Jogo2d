@@ -1,6 +1,6 @@
 package br.ifpr.jogo.servico;
 
-import br.ifpr.jogo.modelo.FaseUm;
+import br.ifpr.jogo.modelo.Fase;
 import br.ifpr.jogo.dao.FaseDao;
 import br.ifpr.jogo.dao.FaseDaoImpl;
 
@@ -9,24 +9,24 @@ import java.util.List;
 public class FaseServico {
     private static FaseDao dao = new FaseDaoImpl();
 
-    public static List<FaseUm> buscarTodos() {
+    public static List<Fase> buscarTodos() {
         return dao.buscarTodos();
     }
 
-    public static FaseUm buscarPorId(Integer id) {
+    public static Fase buscarPorId(Integer id) {
         return dao.buscarPorId(id);
     }
 
-    public void inserir(FaseUm faseUm) {
-        dao.inserir(faseUm);
+    public void inserir(Fase fase) {
+        dao.inserir(fase);
     }
 
-    public static void atualizar(FaseUm faseUm) {
-        dao.atualizar(faseUm);
+    public static void atualizar(Fase fase) {
+        dao.atualizar(fase);
     }
 
-    public static void excluir(FaseUm faseUm) {
-        dao.excluir(faseUm);
+    public static void excluir(Fase fase) {
+        dao.excluir(fase);
     }
 
 }
