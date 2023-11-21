@@ -16,7 +16,6 @@ import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 import br.ifpr.jogo.controle.FaseControler;
-import br.ifpr.jogo.servico.FaseServico;
 
 @Entity
 @Table(name = "tb_fase_um")

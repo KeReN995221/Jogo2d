@@ -17,7 +17,7 @@ public class FaseServico {
         return dao.buscarPorId(id);
     }
 
-    public void inserir(Fase fase) {
+    public static void inserir(Fase fase) {
         dao.inserir(fase);
     }
 

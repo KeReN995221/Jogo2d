@@ -31,7 +31,7 @@ public class Personagem extends ElementoGrafico {
     private int vidas = 5;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fase_id")
+    @Transient
     private Fase fase;
 
     @OneToMany(mappedBy = "personagem")

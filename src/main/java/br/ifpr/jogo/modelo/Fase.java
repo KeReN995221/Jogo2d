@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,14 +15,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
-import org.hibernate.annotations.ManyToAny;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -54,7 +49,7 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
     @Transient
     protected static final int qtd_dinos = 10;
 
-    @Column(name = "timer_fase")
+    @Transient
     protected Timer timer;
 
     @Transient
