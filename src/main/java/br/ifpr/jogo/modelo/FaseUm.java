@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 import br.ifpr.jogo.controle.FaseControler;
+import br.ifpr.jogo.servico.FaseServico;
 
 @Entity
 @Table(name = "tb_fase_um")
@@ -238,6 +239,9 @@ public class FaseUm extends Fase {
             personagem.atirar();
         else if (teclado == KeyEvent.VK_Q)
             personagem.sAtirar();
+
+        else if (teclado == KeyEvent.VK_ENTER)
+            FaseServico.inserir(this);
         else
             personagem.mover(e);
 

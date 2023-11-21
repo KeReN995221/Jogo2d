@@ -181,8 +181,8 @@ public class Personagem extends ElementoGrafico {
             posicaoYAtual = 0;
 
             System.out.println(posicaoYAtual + " \n ");
-        } else if (posicaoXAtual + getLarguraImagem() + 126 > 1000) {
-            posicaoXAtual = 1000 - 126 - getAlturaImagem();
+        } else if (posicaoXAtual + getLarguraImagem() + 126 > 1120) {
+            posicaoXAtual = 1120 - 126 - getLarguraImagem();
         }
 
         super.setPosicaoEmX(posicaoXAtual);

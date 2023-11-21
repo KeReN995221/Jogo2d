@@ -28,7 +28,5 @@ public class Principal extends JFrame {
         Session sessao = HibernateUtil.getSession(); // Singleton
         Principal principal = new Principal();
 
-        HibernateUtil.encerraSession();
-
     }
 }

@@ -27,7 +27,7 @@ public class SuperTiro extends ElementoGrafico {
 
     @Override
     public void carregar() {
-        ImageIcon carregando = new ImageIcon(getClass().getResource("/arma.png"));
+        ImageIcon carregando = new ImageIcon(getClass().getResource("/arma.gif"));
         this.setImagem(carregando.getImage());
         this.setLarguraImagem(getImagem().getWidth(null));
         this.setAlturaImagem(getImagem().getHeight(null));
