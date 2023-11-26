@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import br.ifpr.jogo.controle.FaseControler;
@@ -242,6 +243,20 @@ public class FaseUm extends Fase {
 
         else if (teclado == KeyEvent.VK_ENTER)
             FaseServico.inserir(this);
+
+        else if (teclado == KeyEvent.VK_F) {
+            timer.stop();
+            String idJogo = JOptionPane.showInputDialog("Informe o Id (número do jogo que você queira carregar: )");
+            if (idJogo != null && !idJogo.isEmpty()) {
+                timer.start();
+                int id = Integer.parseInt(idJogo); // converte string para inteiro
+                FaseServico.buscarPorId(id);
+                personagem.carregar();
+                personagem.setVidas(5);
+                emJogo = true;
+            }
+        }
+
         else
             personagem.mover(e);
 

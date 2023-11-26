@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -171,7 +170,8 @@ public class Personagem extends ElementoGrafico {
         if (posicaoXAtual < 0) {
             posicaoXAtual = 0;
 
-        } else if (posicaoYAtual + getAlturaImagem() + 227 > 730) { // 493 é a altura da imagem - a parte que representa
+        } else if (posicaoYAtual + getAlturaImagem() + 227 > 730) { // 4730 é a altura da imagem - a parte que
+                                                                    // representa
                                                                     // o solo
             posicaoYAtual = 730 - 227 - getAlturaImagem();
 

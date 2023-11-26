@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 // Fase = controller
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.persistence.CascadeType;
@@ -60,19 +61,18 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
         setDoubleBuffered(true); // + Otimização computacional
         addKeyListener(this);
     }
-    /*
-     * public abstract void inicializaElementosGraficosAdicionais();
-     * 
-     * public abstract void inicializaInimigos();
-     * 
-     * public abstract void verficarColisoes();
-     */
+
+    public abstract void inicializaElementosGraficosAdicionais();
+
+    public abstract void inicializaInimigos();
+
+    public abstract void verficarColisoes();
 
     public void desenhaPontuacao(Graphics2D graficos) {
         String textoPontuacao = "PONTOS: " + personagem.getPontuacao();
         graficos.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 22));
         graficos.setColor(new java.awt.Color(255, 255, 255));
-        graficos.drawString(textoPontuacao, 20, 25);
+        graficos.drawString(textoPontuacao, 20, 570);
     }
 
     public void desenhaVidas(Graphics2D graficos) {
@@ -80,9 +80,24 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
 
         graficos.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 22));
         graficos.setColor(new java.awt.Color(255, 255, 255));
-        graficos.drawString(textoVidas, 20, 70);
+        graficos.drawString(textoVidas, 300, 570);
 
     }
+
+    /*
+     * @Override
+     * public void keyTyped(KeyEvent e) {
+     * }
+     * 
+     * 
+     * 
+     * @Override
+     * public abstract void keyReleased(KeyEvent e);
+     *
+     * 
+     * @Override
+     * public abstract void actionPerformed(ActionEvent e);
+     */
 
     public int getIdFase() {
         return idFase;
@@ -91,26 +106,6 @@ public abstract class Fase extends JPanel implements ActionListener, KeyListener
     public void setIdFase(int idFase) {
         this.idFase = idFase;
     }
-
-    public abstract void inicializaElementosGraficosAdicionais();
-
-    public abstract void inicializaInimigos();
-
-    public abstract void verficarColisoes();
-    /*
-     * @Override
-     * public void keyTyped(KeyEvent e) {
-     * }
-     * 
-     * @Override
-     * public abstract void keyPressed(KeyEvent e);
-     * 
-     * @Override
-     * public abstract void keyReleased(KeyEvent e);
-     * 
-     * @Override
-     * public abstract void actionPerformed(ActionEvent e);
-     */
 
     public Personagem getPersonagem() {
         return personagem;

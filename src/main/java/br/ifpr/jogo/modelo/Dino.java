@@ -48,4 +48,5 @@ public class Dino extends ElementoGrafico {
             super.setPosicaoEmX(super.getPosicaoEmX() - VELOCIDADE);
         }
     }
+    /* */
 }

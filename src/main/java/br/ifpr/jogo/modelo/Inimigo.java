@@ -42,6 +42,24 @@ public class Inimigo extends ElementoGrafico {
     public void atualizar() {
 
         super.setPosicaoEmX(getPosicaoEmX() - velocidade);
+
+        if (super.getPosicaoEmY() + super.getAlturaImagem() + 191 > 730) {
+
+            super.setPosicaoEmY(730 - 191 - super.getAlturaImagem());
+
+        }
+
+        /*
+         * if (posicaoYAtual + getAlturaImagem() + 227 > 730) { // 4730 é a altura da
+         * imagem - a parte que representa
+         * // o solo
+         * posicaoYAtual = 730 - 227 - getAlturaImagem();
+         * 
+         * }
+         * 
+         * if (posicaoYAtual < 0) {
+         * posicaoYAtual = 0;
+         */
     }
 
 }
